@@ -17,9 +17,9 @@
     --radius:18px; --focus:0 0 0 3px rgba(37,99,255,.18);
     
     /* 모바일 웹 표준 여백 시스템 */
-    --container-padding: 16px;
-    --section-gap: 24px;
-    --card-gap: 16px;
+    --container-padding: 12px;
+    --section-gap: 20px;
+    --card-gap: 14px;
     --border-radius: 16px;
     --button-height: 48px;
     --icon-size: 24px;
@@ -47,6 +47,8 @@
     min-height: 100vh; 
     display:flex; 
     flex-direction:column;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   /* ===== Topbar ===== */
@@ -56,23 +58,33 @@
     z-index:5; 
     background:#fff; 
     border-bottom:1px solid var(--line);
-    padding: 16px var(--container-padding); 
+    padding: 14px var(--container-padding); 
     display:flex; 
     align-items:center; 
     justify-content:space-between;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    box-sizing: border-box;
+    gap: 14px;
+    min-height: 60px;
+    flex-wrap: wrap;
   }
   
   .row{
     display:flex; 
     align-items:center; 
-    gap:10px
+    gap:10px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    min-height: 38px;
+    flex-shrink: 1;
   }
   
   .btn-ic{
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius:12px;
     border:1px solid var(--line);
     background:#fff;
@@ -80,6 +92,7 @@
     place-items:center;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    min-width: 38px;
   }
   
   .btn-ic:hover {
@@ -93,12 +106,19 @@
     align-items:center; 
     gap:8px; 
     font-weight:900;
-    font-size: 18px;
+    font-size: 17px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-height: 26px;
+    flex-shrink: 1;
   }
   
   .title .book{
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-radius:9px;
     border:1px solid #d8e4ff;
     background:#eef4ff;
@@ -106,6 +126,7 @@
     place-items:center;
     color:#e23a3a;
     flex-shrink: 0;
+    min-width: 26px;
   }
   
   .chip-user{
@@ -113,11 +134,18 @@
     align-items:center; 
     gap:8px; 
     border:1px solid var(--line); 
-    padding:8px 12px; 
+    padding:6px 10px; 
     border-radius:999px; 
     background:#fff;
     transition: all 0.2s ease;
     cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 13px;
+    min-height: 32px;
+    max-width: 200px;
   }
   
   .chip-user:hover {
@@ -126,16 +154,17 @@
   }
   
   .chip-user .dot{
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius:999px;
     background:#1e6bff;
     color:#fff;
     display:grid;
     place-items:center;
-    font-size:12px;
+    font-size:11px;
     font-weight:800;
     flex-shrink: 0;
+    min-width: 20px;
   }
 
   .page{
@@ -143,6 +172,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
+    min-height: calc(100vh - 60px);
   }
 
   /* ===== Header panel ===== */
@@ -151,24 +183,38 @@
     border:1px solid var(--line); 
     border-radius:22px; 
     box-shadow:var(--shadow); 
-    padding: 24px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   
   .panel-head{
     display:flex; 
     align-items:center; 
-    justify-content:space-between
+    justify-content:space-between;
+    width: 100%;
+    gap: 16px;
+    min-height: 40px;
+    flex-wrap: wrap;
   }
   
   .panel .left{
     display:flex; 
     align-items:center; 
-    gap:10px
+    gap:10px;
+    flex: 1;
+    min-width: 0;
+    min-height: 28px;
+    flex-shrink: 1;
   }
   
   .round{
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius:999px;
     display:grid;
     place-items:center;
@@ -177,11 +223,17 @@
     color:#e23a3a;
     font-weight:900;
     flex-shrink: 0;
+    min-width: 28px;
   }
   
   .total{
     color:#8b97ad;
-    font-size: 14px;
+    font-size: 13px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
   }
   
   .total b{
@@ -192,7 +244,10 @@
     display:flex; 
     align-items:center; 
     gap:10px; 
-    margin-top:16px
+    margin-top:16px;
+    width: 100%;
+    min-height: 44px;
+    flex-wrap: wrap;
   }
   
   .search .inp{
@@ -202,9 +257,14 @@
     gap:8px; 
     border:1px solid var(--line); 
     border-radius:14px; 
-    padding:12px 16px; 
+    padding:10px 14px; 
     background:#fff;
     transition: all 0.2s ease;
+    min-width: 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
   }
   
   .search .inp:focus-within {
@@ -217,13 +277,18 @@
     border:none; 
     outline:none; 
     width:100%; 
-    font-size:14px
+    font-size:14px;
+    min-width: 0;
+    min-height: 24px;
   }
   
   .filter{
     margin-top:12px; 
     display:flex;
     gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    flex-wrap: wrap;
   }
   
   .filter button{
@@ -231,11 +296,18 @@
     border:1px solid var(--line); 
     background:#fff; 
     border-radius:12px; 
-    padding:12px; 
+    padding:10px; 
     font-weight:800; 
     color:#52607a;
     transition: all 0.2s ease;
     cursor: pointer;
+    min-width: 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1;
+    min-width: 120px;
   }
   
   .filter button:hover {
@@ -249,17 +321,27 @@
     display:flex; 
     flex-direction:column; 
     gap:12px; 
-    margin-top:16px
+    margin-top:16px;
+    width: 100%;
+    min-height: 200px;
+    flex-wrap: wrap;
   }
   
   .item{
     background:#fff; 
     border:1px solid var(--line); 
     border-radius:16px; 
-    padding:16px; 
+    padding:14px; 
     box-shadow:var(--shadow); 
     cursor:pointer;
     transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
   }
   
   .item:hover {
@@ -272,7 +354,10 @@
     align-items:center; 
     justify-content:space-between; 
     color:#8693aa; 
-    font-size:12px
+    font-size:12px;
+    width: 100%;
+    gap: 8px;
+    min-height: 20px;
   }
   
   .badge{
@@ -283,13 +368,21 @@
     border-radius:999px; 
     background:#ffecec; 
     color:#d84c55; 
-    font-weight:900
+    font-weight:900;
+    flex-shrink: 0;
+    min-height: 20px;
   }
   
   .item-ask{
     margin:8px 0 10px;
     font-size: 14px;
     line-height: 1.4;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
   }
   
   .chip{
@@ -299,7 +392,10 @@
     background:#f1f4fb; 
     color:#66748c; 
     font-weight:800; 
-    font-size:12px
+    font-size:12px;
+    flex-shrink: 0;
+    min-height: 20px;
+    align-items: center;
   }
   
   .wrong-flag{
@@ -307,7 +403,10 @@
     align-items:center; 
     gap:6px; 
     color:#e23a3a; 
-    font-weight:800
+    font-weight:800;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 20px;
   }
 
   /* ===== Detail ===== */
@@ -321,17 +420,29 @@
     justify-content: center;
     color: #fff;
     font-size: 14px;
+    min-height: 170px;
   }
   
   .sec{
-    margin-top:16px
+    margin-top:16px;
+    min-height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .qbox{
     border:1px solid var(--line); 
     background:#fff; 
     border-radius:16px; 
-    padding:20px
+    padding:20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .qbox .qtitle{
@@ -341,6 +452,10 @@
     font-weight:900; 
     margin-bottom:12px;
     font-size: 16px;
+    min-height: 24px;
+    gap: 8px;
+    width: 100%;
+    flex-wrap: wrap;
   }
   
   .opt{
@@ -354,6 +469,10 @@
     transition: all 0.2s ease;
     cursor: pointer;
     margin-bottom: 8px;
+    min-height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
   }
   
   .opt:hover {
@@ -373,38 +492,47 @@
     color:#738099; 
     font-weight:800;
     flex-shrink: 0;
+    min-width: 28px;
+    min-height: 28px;
   }
 
   .opt.correct{
     border-color:#7bdab8; 
-    background:var(--green-50)
+    background:var(--green-50);
+    min-height: 60px;
   }
   
   .opt.correct .num{
     border-color:#9fe6cf; 
     background:#e7fff6; 
-    color:#0b9b6b
+    color:#0b9b6b;
+    min-height: 28px;
   }
   
   .opt.wrong{
     border-color:#ffb7bf; 
-    background:var(--rose-50)
+    background:var(--rose-50);
+    min-height: 60px;
   }
   
   .opt.wrong .num{
     border-color:#ffc4cc; 
     background:#fff0f2; 
-    color:#d9484c
+    color:#d9484c;
+    min-height: 28px;
   }
 
   .actions{
     display:flex; 
     gap:12px; 
-    margin-top:16px
+    margin-top:16px;
+    min-height: 60px;
+    align-items: center;
   }
   
   .half{
-    flex:1
+    flex:1;
+    min-height: 48px;
   }
   
   .btn-primary{
@@ -419,6 +547,10 @@
     transition: all 0.2s ease;
     cursor: pointer;
     height: var(--button-height);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .btn-primary:hover {
@@ -437,6 +569,10 @@
     transition: all 0.2s ease;
     cursor: pointer;
     height: var(--button-height);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .btn-ghost:hover {
@@ -449,18 +585,21 @@
     padding:16px; 
     margin-top:16px;
     line-height: 1.5;
+    min-height: 100px;
   }
   
   .explain.bad{
     border:1px solid var(--rose-200); 
     background:#fff7f8; 
-    color:#a13136
+    color:#a13136;
+    min-height: 100px;
   }
   
   .explain.good{
     border:1px solid var(--green-200); 
     background:#f0fdf7; 
-    color:#0e7d5a
+    color:#0e7d5a;
+    min-height: 100px;
   }
   
   .law{
@@ -468,7 +607,8 @@
     border:1px solid #dbe6ff; 
     background:#f5f8ff; 
     border-radius:12px; 
-    padding:12px
+    padding:12px;
+    min-height: 60px;
   }
   
   .law a{
@@ -476,6 +616,9 @@
     text-decoration:none; 
     font-weight:900;
     transition: color 0.2s ease;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
   }
   
   .law a:hover {
@@ -484,13 +627,17 @@
 
   /* 추천 유사 문제 */
   .rec{
-    margin-top:16px
+    margin-top:16px;
+    min-height: 100px;
   }
   
   .rec h3{
     margin:8px 0 12px; 
     font-size:16px;
     font-weight: 800;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
   }
   
   .pill{
@@ -505,6 +652,10 @@
     transition: all 0.2s ease;
     cursor: pointer;
     margin-bottom: 8px;
+    min-height: 80px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
   }
   
   .pill:hover {
@@ -515,6 +666,12 @@
   .pill .name{
     font-weight:900;
     font-size: 14px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    flex-shrink: 1;
   }
   
   .pill .desc{
@@ -522,6 +679,12 @@
     color:#6b7a93; 
     margin-top:4px;
     line-height: 1.4;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    flex-shrink: 1;
   }
   
   .pill .chev{
@@ -533,21 +696,26 @@
     place-items:center;
     background:#fff;
     flex-shrink: 0;
+    min-width: 28px;
+    min-height: 28px;
   }
   
   .pill.green{
     background:var(--green-50); 
-    border-color:#d7f5ea
+    border-color:#d7f5ea;
+    min-height: 80px;
   }
   
   .pill.amber{
     background:var(--amber-50); 
-    border-color:#ffedc2
+    border-color:#ffedc2;
+    min-height: 80px;
   }
   
   .pill.rose{
     background:var(--rose-50); 
-    border-color:#ffcfd6
+    border-color:#ffcfd6;
+    min-height: 80px;
   }
 
   .backbar{
@@ -556,11 +724,18 @@
     background:var(--bg); 
     padding:16px 0 4px;
     margin-top: auto;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
   }
   
   .backbar .btn-ghost{
     background:#fff;
     width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   a:focus, button:focus, .pill:focus, .opt:focus{
@@ -585,6 +760,40 @@
     
     .topbar {
       padding: 16px 16px;
+      gap: 12px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .row {
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .chip-user {
+      align-self: center;
+      max-width: none;
+    }
+    
+    .title {
+      font-size: 16px;
+      gap: 6px;
+    }
+    
+    .title .book {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .chip-user {
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    
+    .chip-user .dot {
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
     }
     
     .btn-ic {
@@ -600,20 +809,66 @@
       padding: 10px 14px;
     }
     
+    .search {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .search .inp {
+      flex-shrink: 0;
+    }
+    
     .filter button {
       padding: 10px;
+    }
+    
+    .filter {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .filter button {
+      flex-shrink: 0;
+      min-width: auto;
     }
     
     .item {
       padding: 14px;
     }
     
+    .list {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
     .qbox {
       padding: 16px;
     }
     
+    .qbox {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .qbox .qtitle {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    
     .opt {
       padding: 14px;
+    }
+    
+    .opt {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      text-align: center;
     }
     
     .btn-primary, .btn-ghost {
@@ -622,120 +877,685 @@
     
     .pill {
       padding: 14px;
+    }
+    
+    .pill {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      text-align: center;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .pill .chev {
+      align-self: center;
+    }
+    
+    /* 모바일 터치 최적화 */
+    .btn-ic, .filter button, .item, .opt, .pill {
+      min-height: 44px; /* 터치 최소 크기 */
+    }
+    
+    .search .inp {
+      min-height: 44px;
+    }
+    
+    /* 모바일에서 더 나은 간격 */
+    .filter {
+      gap: 6px;
+    }
+    
+    .filter button {
+      font-size: 13px;
+    }
+    
+    .item-ask {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    
+    .chip {
+      font-size: 11px;
+      padding: 3px 6px;
+    }
+    
+    .badge {
+      font-size: 11px;
+      padding: 3px 6px;
+    }
+    
+    /* 모바일에서 비디오 높이 조정 */
+    .video {
+      height: 140px;
+    }
+    
+    /* 모바일에서 버튼 그룹 간격 조정 */
+    .actions {
+      gap: 8px;
+    }
+    
+    /* 모바일에서 설명 텍스트 크기 조정 */
+    .explain {
+      font-size: 13px;
+      padding: 14px;
+    }
+    
+    .law {
+      font-size: 12px;
+      padding: 10px;
     }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
     :root {
-      --container-padding: 24px;
-      --section-gap: 32px;
-      --card-gap: 20px;
-      --border-radius: 20px;
-      --button-height: 56px;
-      --icon-size: 28px;
+      --container-padding: 12px;
+      --section-gap: 24px;
+      --card-gap: 16px;
+      --border-radius: 18px;
+      --button-height: 52px;
+      --icon-size: 26px;
     }
     
     .page {
-      padding: 32px 24px;
-      gap: 32px;
+      padding: 24px 12px;
+      gap: 24px;
     }
     
     .topbar {
-      padding: 20px 24px;
+      padding: 16px 12px;
     }
     
     .btn-ic {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
     }
     
     .panel {
-      padding: 28px;
+      padding: 20px;
     }
     
     .search .inp {
-      padding: 14px 18px;
+      padding: 12px 16px;
     }
     
     .filter button {
-      padding: 14px;
+      padding: 12px;
     }
     
     .item {
-      padding: 18px;
+      padding: 16px;
     }
     
     .qbox {
-      padding: 24px;
+      padding: 20px;
     }
     
     .opt {
-      padding: 18px;
+      padding: 16px;
     }
     
     .btn-primary, .btn-ghost {
-      padding: 18px;
+      padding: 16px;
     }
     
     .pill {
-      padding: 18px;
+      padding: 16px;
+    }
+    
+    /* 태블릿 터치 최적화 */
+    .btn-ic, .filter button, .item, .opt, .pill {
+      min-height: 48px;
+    }
+    
+    .search .inp {
+      min-height: 48px;
+    }
+    
+    /* 태블릿에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+    .title {
+      font-size: 18px;
+      gap: 8px;
+    }
+    
+    .title .book {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .chip-user {
+      padding: 8px 14px;
+      font-size: 14px;
+      max-width: 180px;
+    }
+    
+    .chip-user .dot {
+      width: 24px;
+      height: 24px;
+      font-size: 13px;
+    }
+    
+    /* 태블릿에서 패널 내부 요소들이 화면 너비에 맞게 확장되도록 */
+    .panel-head .left {
+      gap: 10px;
+    }
+    
+    .round {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+    
+    .total {
+      font-size: 14px;
+    }
+    
+    .row {
+      flex-shrink: 1;
+    }
+    
+    .title {
+      flex-shrink: 1;
+    }
+    
+    .panel-head {
+      gap: 20px;
+    }
+    
+    .panel .left {
+      flex-shrink: 1;
+    }
+    
+    .search {
+      gap: 12px;
+    }
+    
+    .search .inp {
+      flex-shrink: 1;
+    }
+    
+    .filter {
+      gap: 10px;
+    }
+    
+    .filter button {
+      flex-shrink: 1;
+      min-width: 140px;
+    }
+    
+    .list {
+      gap: 16px;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
+    .qbox {
+      gap: 20px;
+    }
+    
+    .qbox .qtitle {
+      gap: 10px;
+    }
+    
+    .opt {
+      gap: 12px;
+    }
+    
+    .pill {
+      gap: 12px;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      flex-shrink: 1;
     }
   }
 
   @media (min-width: 769px) {
     :root {
-      --container-padding: 32px;
-      --section-gap: 40px;
-      --card-gap: 24px;
-      --border-radius: 24px;
-      --button-height: 64px;
-      --icon-size: 32px;
+      --container-padding: 8px;
+      --section-gap: 24px;
+      --card-gap: 16px;
+      --border-radius: 18px;
+      --button-height: 52px;
+      --icon-size: 26px;
     }
     
     .page {
-      padding: 40px 32px;
-      gap: 40px;
+      padding: 24px 8px;
+      gap: 24px;
     }
     
     .topbar {
-      padding: 24px 32px;
+      padding: 16px 8px;
     }
     
     .btn-ic {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
     }
     
     .panel {
-      padding: 32px;
+      padding: 20px;
     }
     
     .search .inp {
-      padding: 16px 20px;
+      padding: 12px 16px;
     }
     
     .filter button {
-      padding: 16px;
+      padding: 12px;
     }
     
     .item {
-      padding: 20px;
+      padding: 16px;
     }
     
     .qbox {
-      padding: 28px;
+      padding: 20px;
     }
     
     .opt {
-      padding: 20px;
+      padding: 16px;
     }
     
     .btn-primary, .btn-ghost {
-      padding: 20px;
+      padding: 16px;
     }
     
     .pill {
-      padding: 20px;
+      padding: 16px;
+    }
+    
+    /* 데스크탑에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+    .title {
+      font-size: 20px;
+      gap: 10px;
+    }
+    
+    .title .book {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .chip-user {
+      padding: 10px 16px;
+      font-size: 15px;
+      max-width: 200px;
+    }
+    
+    .chip-user .dot {
+      width: 26px;
+      height: 26px;
+      font-size: 14px;
+    }
+    
+    /* 데스크탑에서 패널 내부 요소들이 화면 너비에 맞게 확장되도록 */
+    .panel-head .left {
+      gap: 12px;
+    }
+    
+    .round {
+      width: 34px;
+      height: 34px;
+      font-size: 16px;
+    }
+    
+    .total {
+      font-size: 16px;
+    }
+    
+    .search .inp {
+      min-height: 52px;
+    }
+    
+    .filter button {
+      min-height: 52px;
+      font-size: 15px;
+    }
+    
+    .item {
+      min-height: 52px;
+    }
+    
+    .qbox {
+      min-height: 52px;
+    }
+    
+    .opt {
+      min-height: 52px;
+    }
+    
+    .row {
+      flex-shrink: 1;
+    }
+    
+    .title {
+      flex-shrink: 1;
+    }
+    
+    .panel-head {
+      gap: 24px;
+    }
+    
+    .panel .left {
+      flex-shrink: 1;
+    }
+    
+    .search {
+      gap: 16px;
+    }
+    
+    .search .inp {
+      flex-shrink: 1;
+    }
+    
+    .filter {
+      gap: 12px;
+    }
+    
+    .filter button {
+      flex-shrink: 1;
+      min-width: 160px;
+    }
+    
+    .list {
+      gap: 20px;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
+    .qbox {
+      gap: 24px;
+    }
+    
+    .qbox .qtitle {
+      gap: 12px;
+    }
+    
+    .opt {
+      gap: 16px;
+    }
+    
+    .pill {
+      gap: 16px;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      flex-shrink: 1;
+    }
+  }
+  
+  /* ===== 모바일 터치 최적화 ===== */
+  @media (hover: none) and (pointer: coarse) {
+    /* 터치 디바이스에서 호버 효과 제거 */
+    .btn-ic:hover, .filter button:hover, .item:hover, .opt:hover, .pill:hover {
+      transform: none;
+      box-shadow: var(--shadow);
+    }
+    
+    /* 터치 디바이스에서 활성 상태 스타일 */
+    .btn-ic:active, .filter button:active, .item:active, .opt:active, .pill:active {
+      transform: scale(0.98);
+      opacity: 0.8;
+    }
+    
+    /* 터치 디바이스에서 포커스 스타일 강화 */
+    .btn-ic:focus, .filter button:focus, .item:focus, .opt:focus, .pill:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+  }
+  
+  /* ===== 세로 모드 최적화 ===== */
+  @media (orientation: portrait) and (max-width: 480px) {
+    .topbar {
+      padding: 12px 16px;
+    }
+    
+    .title {
+      font-size: 16px;
+    }
+    
+    .title .book {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .chip-user {
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    
+    .chip-user .dot {
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+    }
+    
+    .panel-head .left {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    
+    .round {
+      width: 26px;
+      height: 26px;
+      font-size: 12px;
+    }
+    
+    .total {
+      font-size: 12px;
+    }
+  }
+  
+  /* ===== 가로 모드 최적화 ===== */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .topbar {
+      padding: 8px var(--container-padding);
+    }
+    
+    .page {
+      padding: 16px var(--container-padding);
+      gap: 16px;
+    }
+    
+    .panel {
+      padding: 16px;
+    }
+    
+    .search {
+      margin-top: 12px;
+    }
+    
+    .filter {
+      margin-top: 8px;
+    }
+  }
+  
+  /* ===== 매우 작은 화면 최적화 ===== */
+  @media (max-width: 360px) {
+    .topbar {
+      padding: 12px 12px;
+      gap: 8px;
+    }
+    
+    .title {
+      font-size: 15px;
+      gap: 4px;
+    }
+    
+    .title .book {
+      width: 22px;
+      height: 22px;
+    }
+    
+    .chip-user {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    
+    .chip-user .dot {
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+    }
+    
+    .btn-ic {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  
+  /* ===== 매우 큰 화면 최적화 ===== */
+  @media (min-width: 1200px) {
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .topbar {
+      padding: 20px 16px;
+    }
+    
+    .page {
+      padding: 32px 16px;
+      gap: 32px;
+    }
+    
+    .panel {
+      padding: 28px;
+    }
+    
+    /* 매우 큰 화면에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+    .title {
+      font-size: 22px;
+      gap: 12px;
+    }
+    
+    .title .book {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .chip-user {
+      padding: 12px 20px;
+      font-size: 16px;
+      max-width: 220px;
+    }
+    
+    .chip-user .dot {
+      width: 28px;
+      height: 28px;
+      font-size: 15px;
+    }
+    
+    /* 매우 큰 화면에서 패널 내부 요소들이 화면 너비에 맞게 확장되도록 */
+    .panel-head .left {
+      gap: 14px;
+    }
+    
+    .round {
+      width: 38px;
+      height: 38px;
+      font-size: 18px;
+    }
+    
+    .total {
+      font-size: 18px;
+    }
+    
+    .search .inp {
+      min-height: 56px;
+    }
+    
+    .filter button {
+      min-height: 56px;
+      font-size: 16px;
+    }
+    
+    .item {
+      min-height: 56px;
+    }
+    
+    .qbox {
+      min-height: 56px;
+    }
+    
+    .opt {
+      min-height: 56px;
+    }
+    
+    .row {
+      flex-shrink: 1;
+    }
+    
+    .title {
+      flex-shrink: 1;
+    }
+    
+    .panel-head {
+      gap: 28px;
+    }
+    
+    .panel .left {
+      flex-shrink: 1;
+    }
+    
+    .search {
+      gap: 20px;
+    }
+    
+    .search .inp {
+      flex-shrink: 1;
+    }
+    
+    .filter {
+      gap: 16px;
+    }
+    
+    .filter button {
+      flex-shrink: 1;
+      min-width: 180px;
+    }
+    
+    .list {
+      gap: 24px;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
+    .qbox {
+      gap: 28px;
+    }
+    
+    .qbox .qtitle {
+      gap: 16px;
+    }
+    
+    .opt {
+      gap: 20px;
+    }
+    
+    .pill {
+      gap: 20px;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      flex-shrink: 1;
     }
   }
 </style>

@@ -46,6 +46,8 @@
     min-height: 100vh; 
     display:flex; 
     flex-direction:column;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   /* topbar */
@@ -61,12 +63,22 @@
     justify-content:space-between;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    box-sizing: border-box;
+    gap: 16px;
+    min-height: 60px;
+    flex-wrap: wrap;
   }
   
   .row{
     display:flex; 
     align-items:center; 
-    gap:10px
+    gap:10px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    min-height: 38px;
+    flex-shrink: 1;
   }
   
   .btn-ic{
@@ -79,6 +91,7 @@
     place-items:center;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    min-width: 40px;
   }
   
   .btn-ic:hover {
@@ -93,6 +106,13 @@
     gap:8px; 
     font-weight:900;
     font-size: 18px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-height: 26px;
+    flex-shrink: 1;
   }
   
   .title .badge{
@@ -105,6 +125,7 @@
     place-items:center;
     color:#6f4ef6;
     flex-shrink: 0;
+    min-width: 28px;
   }
   
   .chip-user{
@@ -117,6 +138,13 @@
     background:#fff;
     transition: all 0.2s ease;
     cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 14px;
+    min-height: 36px;
+    max-width: 200px;
   }
   
   .chip-user:hover {
@@ -135,6 +163,7 @@
     font-size:12px;
     font-weight:800;
     flex-shrink: 0;
+    min-width: 22px;
   }
 
   .page{
@@ -142,12 +171,19 @@
     display: flex;
     flex-direction: column;
     gap: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
+    min-height: calc(100vh - 60px);
   }
   
   h1{
     margin:6px 0 4px; 
     font-size:20px;
     font-weight: 800;
+    width: 100%;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
   }
   
   .sub{
@@ -155,6 +191,10 @@
     font-size:13px; 
     margin-bottom:10px;
     line-height: 1.4;
+    width: 100%;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
   }
 
   /* cards */
@@ -165,6 +205,12 @@
     box-shadow:var(--shadow); 
     padding: 24px;
     transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   
   .card:hover {
@@ -182,6 +228,10 @@
     background:#fff;
     transition: all 0.2s ease;
     margin-bottom: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 80px;
+    flex-shrink: 0;
   }
   
   .stat:last-child {
@@ -202,6 +252,8 @@
     place-items:center;
     border:1px solid var(--line);
     flex-shrink: 0;
+    min-width: 36px;
+    min-height: 36px;
   }
   
   .ic.blue{
@@ -226,12 +278,24 @@
     color:#6b7a93; 
     font-size:12px;
     font-weight: 600;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
   }
   
   .stat .num{
     font-weight:900; 
     font-size:22px;
     color: var(--text);
+    flex-shrink: 0;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
   }
 
   /* weekly */
@@ -241,6 +305,10 @@
     gap:10px; 
     padding:12px 0;
     border-bottom: 1px solid var(--bg);
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+    flex-shrink: 0;
   }
   
   .week li:last-child {
@@ -252,6 +320,10 @@
     color:#54607a;
     font-weight: 600;
     flex-shrink: 0;
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
   }
   
   .stack{
@@ -260,7 +332,9 @@
     border-radius:999px; 
     background:#eef1f6; 
     position:relative; 
-    overflow:hidden
+    overflow:hidden;
+    min-width: 0;
+    min-height: 14px;
   }
   
   .stack .good{
@@ -287,6 +361,11 @@
     font-size:12px; 
     color:#6b7a93;
     flex-shrink: 0;
+    min-width: 46px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   /* category */
@@ -295,6 +374,10 @@
     align-items:center; 
     justify-content:space-between;
     margin-bottom: 8px;
+    width: 100%;
+    gap: 16px;
+    min-height: 32px;
+    flex-shrink: 0;
   }
   
   .cat .label{
@@ -302,16 +385,33 @@
     align-items:center; 
     gap:6px;
     font-weight: 600;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-height: 24px;
+    flex-shrink: 1;
   }
   
   .cat .trend.up{
     color:#0b9b6b;
     font-weight: 800;
+    flex-shrink: 0;
+    min-width: 16px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
   }
   
   .cat .trend.down{
     color:#d9484c;
     font-weight: 800;
+    flex-shrink: 0;
+    min-width: 16px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
   }
   
   .pill{
@@ -322,6 +422,12 @@
     color:#295bff; 
     font-weight:900;
     flex-shrink: 0;
+    min-width: 40px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
   }
   
   .bar{
@@ -331,6 +437,8 @@
     border-radius:999px; 
     overflow:hidden;
     margin-bottom: 16px;
+    width: 100%;
+    min-height: 8px;
   }
   
   .bar > i{
@@ -349,6 +457,10 @@
     margin-bottom:12px; 
     font-weight:900;
     font-size: 16px;
+    width: 100%;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
   }
   
   .bubble{
@@ -359,6 +471,11 @@
     padding:16px; 
     line-height:1.6;
     transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
   }
   
   .bubble:hover {
@@ -385,6 +502,8 @@
     transition: all 0.2s ease;
     cursor: pointer;
     height: var(--button-height);
+    box-sizing: border-box;
+    min-height: 48px;
   }
   
   .btn-primary:hover {
@@ -414,6 +533,40 @@
     
     .topbar {
       padding: 16px 16px;
+      gap: 12px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .row {
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .chip-user {
+      align-self: center;
+      max-width: none;
+    }
+    
+    .title {
+      font-size: 16px;
+      gap: 6px;
+    }
+    
+    .title .badge {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .chip-user {
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    
+    .chip-user .dot {
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
     }
     
     .btn-ic {
@@ -438,91 +591,579 @@
       padding: 14px;
       margin: 12px 0 20px;
     }
+    
+    /* 모바일 터치 최적화 */
+    .btn-ic, .stat, .btn-primary {
+      min-height: 44px; /* 터치 최소 크기 */
+    }
+    
+    /* 모바일에서 더 나은 간격 */
+    .stat {
+      margin-bottom: 6px;
+    }
+    
+    .stat .name {
+      font-size: 11px;
+    }
+    
+    .stat .num {
+      font-size: 18px;
+    }
+    
+    .ic {
+      width: 30px;
+      height: 30px;
+    }
+    
+    /* 모바일에서 제목 크기 조정 */
+    h1 {
+      font-size: 18px;
+      margin: 4px 0 2px;
+    }
+    
+    .sub {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    
+    /* 모바일에서 주간 차트 최적화 */
+    .week li {
+      padding: 10px 0;
+    }
+    
+    .week .d {
+      font-size: 11px;
+      width: 18px;
+    }
+    
+    .week .total {
+      font-size: 11px;
+      width: 40px;
+    }
+    
+    /* 모바일에서 카테고리 차트 최적화 */
+    .cat .row {
+      margin-bottom: 6px;
+    }
+    
+    .cat .label {
+      font-size: 13px;
+    }
+    
+    .pill {
+      font-size: 11px;
+      padding: 3px 6px;
+    }
+    
+    .bar {
+      height: 6px;
+      margin-bottom: 12px;
+    }
+    
+    /* 모바일에서 피드백 최적화 */
+    .feed .hint {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    
+    .bubble {
+      padding: 14px;
+      font-size: 13px;
+    }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
     :root {
-      --container-padding: 24px;
-      --section-gap: 32px;
-      --card-gap: 20px;
-      --border-radius: 20px;
-      --button-height: 56px;
-      --icon-size: 28px;
+      --container-padding: 12px;
+      --section-gap: 24px;
+      --card-gap: 16px;
+      --border-radius: 18px;
+      --button-height: 52px;
+      --icon-size: 26px;
     }
     
     .page {
-      padding: 32px 24px;
-      gap: 32px;
+      padding: 24px 12px;
+      gap: 24px;
     }
     
     .topbar {
-      padding: 20px 24px;
+      padding: 16px 12px;
     }
     
     .btn-ic {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
+    }
+    
+    .card {
+      padding: 20px;
+    }
+    
+    .stat {
+      padding: 16px;
+    }
+    
+    .ic {
+      width: 38px;
+      height: 38px;
+    }
+    
+    .btn-primary {
+      padding: 16px;
+      margin: 18px 0 24px;
+    }
+    
+    /* 태블릿 터치 최적화 */
+    .btn-ic, .stat, .btn-primary {
+      min-height: 48px;
+    }
+    
+    /* 태블릿에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+    .title {
+      font-size: 18px;
+      gap: 8px;
+    }
+    
+    .title .badge {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .chip-user {
+      padding: 8px 14px;
+      font-size: 14px;
+      max-width: 180px;
+    }
+    
+    .chip-user .dot {
+      width: 24px;
+      height: 24px;
+      font-size: 13px;
+    }
+    
+    /* 태블릿에서 패널 내부 요소들이 화면 너비에 맞게 확장되도록 */
+    .row {
+      flex-shrink: 1;
+    }
+    
+    .title {
+      flex-shrink: 1;
+    }
+    
+    .topbar {
+      gap: 20px;
+    }
+    
+    .search {
+      gap: 12px;
+    }
+    
+    .search .inp {
+      flex-shrink: 1;
+    }
+    
+    .filter {
+      gap: 10px;
+    }
+    
+    .filter button {
+      flex-shrink: 1;
+      min-width: 140px;
+    }
+    
+    .list {
+      gap: 16px;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
+    .qbox {
+      gap: 20px;
+    }
+    
+    .qbox .qtitle {
+      gap: 10px;
+    }
+    
+    .opt {
+      gap: 12px;
+    }
+    
+    .pill {
+      gap: 12px;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      flex-shrink: 1;
+    }
+  }
+
+  @media (min-width: 769px) {
+    :root {
+      --container-padding: 8px;
+      --section-gap: 24px;
+      --card-gap: 16px;
+      --border-radius: 18px;
+      --button-height: 52px;
+      --icon-size: 26px;
+    }
+    
+    .page {
+      padding: 24px 8px;
+      gap: 24px;
+    }
+    
+    .topbar {
+      padding: 16px 8px;
+    }
+    
+    .btn-ic {
+      width: 42px;
+      height: 42px;
+    }
+    
+    .card {
+      padding: 20px;
+    }
+    
+    .stat {
+      padding: 16px;
+    }
+    
+    .ic {
+      width: 38px;
+      height: 38px;
+    }
+    
+    .btn-primary {
+      padding: 16px;
+      margin: 18px 0 24px;
+    }
+    
+    /* 데스크탑에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+    .title {
+      font-size: 20px;
+      gap: 10px;
+    }
+    
+    .title .badge {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .chip-user {
+      padding: 10px 16px;
+      font-size: 15px;
+      max-width: 200px;
+    }
+    
+    .chip-user .dot {
+      width: 26px;
+      height: 26px;
+      font-size: 14px;
+    }
+    
+    /* 데스크탑에서 패널 내부 요소들이 화면 너비에 맞게 확장되도록 */
+    .row {
+      flex-shrink: 1;
+    }
+    
+    .title {
+      flex-shrink: 1;
+    }
+    
+    .topbar {
+      gap: 24px;
+    }
+    
+    .search {
+      gap: 16px;
+    }
+    
+    .search .inp {
+      flex-shrink: 1;
+    }
+    
+    .filter {
+      gap: 12px;
+    }
+    
+    .filter button {
+      flex-shrink: 1;
+      min-width: 160px;
+    }
+    
+    .list {
+      gap: 20px;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
+    .qbox {
+      gap: 24px;
+    }
+    
+    .qbox .qtitle {
+      gap: 12px;
+    }
+    
+    .opt {
+      gap: 16px;
+    }
+    
+    .pill {
+      gap: 16px;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      flex-shrink: 1;
+    }
+  }
+  
+  /* ===== 매우 큰 화면 최적화 ===== */
+  @media (min-width: 1200px) {
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .topbar {
+      padding: 20px 16px;
+    }
+    
+    .page {
+      padding: 32px 16px;
+      gap: 32px;
     }
     
     .card {
       padding: 28px;
     }
     
+    /* 매우 큰 화면에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+    .title {
+      font-size: 22px;
+      gap: 12px;
+    }
+    
+    .title .badge {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .chip-user {
+      padding: 12px 20px;
+      font-size: 16px;
+      max-width: 220px;
+    }
+    
+    .chip-user .dot {
+      width: 28px;
+      height: 28px;
+      font-size: 15px;
+    }
+    
+    /* 매우 큰 화면에서 패널 내부 요소들이 화면 너비에 맞게 확장되도록 */
+    .topbar {
+      gap: 28px;
+    }
+    
+    .search {
+      gap: 20px;
+    }
+    
+    .search .inp {
+      flex-shrink: 1;
+    }
+    
+    .filter {
+      gap: 16px;
+    }
+    
+    .filter button {
+      flex-shrink: 1;
+      min-width: 180px;
+    }
+    
+    .list {
+      gap: 24px;
+    }
+    
+    .item {
+      flex-shrink: 0;
+    }
+    
+    .qbox {
+      gap: 28px;
+    }
+    
+    .qbox .qtitle {
+      gap: 16px;
+    }
+    
+    .opt {
+      gap: 20px;
+    }
+    
+    .pill {
+      gap: 20px;
+    }
+    
+    .pill .name,
+    .pill .desc {
+      flex-shrink: 1;
+    }
+  }
+  
+  /* ===== 모바일 터치 최적화 ===== */
+  @media (hover: none) and (pointer: coarse) {
+    /* 터치 디바이스에서 호버 효과 제거 */
+    .btn-ic:hover, .stat:hover, .card:hover, .bubble:hover {
+      transform: none;
+      box-shadow: var(--shadow);
+    }
+    
+    /* 터치 디바이스에서 활성 상태 스타일 */
+    .btn-ic:active, .stat:active, .card:active, .bubble:active {
+      transform: scale(0.98);
+      opacity: 0.8;
+    }
+    
+    /* 터치 디바이스에서 포커스 스타일 강화 */
+    .btn-ic:focus, .stat:focus, .card:focus, .bubble:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+  }
+  
+  /* ===== 세로 모드 최적화 ===== */
+  @media (orientation: portrait) and (max-width: 480px) {
+    .topbar {
+      padding: 12px 16px;
+    }
+    
+    .title {
+      font-size: 16px;
+    }
+    
+    .title .badge {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .chip-user {
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    
+    .chip-user .dot {
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+    }
+    
     .stat {
-      padding: 18px;
+      padding: 12px;
     }
     
     .ic {
-      width: 40px;
-      height: 40px;
-    }
-    
-    .btn-primary {
-      padding: 18px;
-      margin: 20px 0 28px;
+      width: 28px;
+      height: 28px;
     }
   }
-
-  @media (min-width: 769px) {
-    :root {
-      --container-padding: 32px;
-      --section-gap: 40px;
-      --card-gap: 24px;
-      --border-radius: 24px;
-      --button-height: 64px;
-      --icon-size: 32px;
+  
+  /* ===== 가로 모드 최적화 ===== */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .topbar {
+      padding: 8px var(--container-padding);
     }
     
     .page {
-      padding: 40px 32px;
-      gap: 40px;
+      padding: 16px var(--container-padding);
+      gap: 16px;
+    }
+    
+    .card {
+      padding: 16px;
+    }
+    
+    .stat {
+      padding: 12px;
+      margin-bottom: 6px;
+    }
+    
+    h1 {
+      margin: 2px 0 1px;
+      font-size: 18px;
+    }
+    
+    .sub {
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+  }
+  
+  /* ===== 작은 화면에서의 그리드 최적화 ===== */
+  @media (max-width: 360px) {
+    .page {
+      padding: 16px 12px;
+      gap: 16px;
     }
     
     .topbar {
-      padding: 24px 32px;
+      padding: 12px 12px;
+    }
+    
+    .card {
+      padding: 16px;
+    }
+    
+    .stat {
+      padding: 12px;
+    }
+    
+    .btn-primary {
+      padding: 12px;
+      margin: 10px 0 16px;
+    }
+    
+    /* 매우 작은 화면에서 아이콘 크기 조정 */
+    .ic {
+      width: 28px;
+      height: 28px;
     }
     
     .btn-ic {
-      width: 48px;
-      height: 48px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+  
+  /* ===== 매우 큰 화면 최적화 ===== */
+  @media (min-width: 1200px) {
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .topbar {
+      padding: 24px 20px;
+    }
+    
+    .page {
+      padding: 40px 20px;
+      gap: 40px;
     }
     
     .card {
       padding: 32px;
-    }
-    
-    .stat {
-      padding: 20px;
-    }
-    
-    .ic {
-      width: 44px;
-      height: 44px;
-    }
-    
-    .btn-primary {
-      padding: 20px;
-      margin: 24px 0 32px;
     }
   }
 </style>
@@ -644,3 +1285,4 @@
 <!-- analytics.js에서 모든 기능을 처리하므로 여기서는 제거 -->
 </body>
 </html>
+

@@ -46,6 +46,8 @@
       min-height: 100vh; 
       display:flex; 
       flex-direction:column;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     /* 헤더 */
@@ -56,12 +58,17 @@
       position:relative; 
       overflow:hidden;
       box-shadow:0 14px 30px rgba(54,80,255,.25);
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .hero .top{
       display:flex; 
       gap:12px; 
       align-items:center;
+      width: 100%;
+      min-height: 64px;
+      flex-wrap: wrap;
     }
     
     .avatar{
@@ -74,11 +81,25 @@
       place-items:center; 
       font-size:28px;
       flex-shrink: 0;
+      min-width: 64px;
+      min-height: 64px;
+    }
+    
+    .who{
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
     }
     
     .who .name{
       font-weight:900; 
-      font-size:20px
+      font-size:20px;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     
     .who .meta{
@@ -87,11 +108,18 @@
       gap:8px; 
       color:#e7ecff; 
       font-size:12px; 
-      margin-top:6px
+      margin-top:6px;
+      min-height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     
     .who .meta svg{
-      opacity:.9
+      opacity:.9;
+      flex-shrink: 0;
+      min-width: 14px;
+      min-height: 14px;
     }
 
     /* 통계 카드 */
@@ -100,6 +128,8 @@
       grid-template-columns:1fr 1fr; 
       gap:12px; 
       margin-top:16px;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .stat{
@@ -109,6 +139,12 @@
       padding:16px; 
       text-align:center;
       transition: all 0.2s ease;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
     }
     
     .stat:hover {
@@ -119,18 +155,32 @@
     .stat .badge{
       font-size:24px; 
       margin-bottom:8px; 
-      display:block
+      display:block;
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .stat .num{
       font-weight:900; 
       font-size:18px; 
-      margin-bottom:4px
+      margin-bottom:4px;
+      min-height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .stat .cap{
       font-size:11px; 
-      opacity:.9
+      opacity:.9;
+      min-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.2;
     }
 
     /* 설정 메뉴 */
@@ -139,6 +189,8 @@
       display: flex;
       flex-direction: column;
       gap: var(--section-gap);
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .sec-title{
@@ -149,6 +201,9 @@
       font-size:16px;
       margin-bottom:16px; 
       color:var(--text);
+      min-height: 24px;
+      display: flex;
+      align-items: center;
     }
     
     .item{
@@ -162,6 +217,10 @@
       margin-bottom:8px; 
       cursor:pointer; 
       transition:all .2s;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 80px;
+      flex-shrink: 0;
     }
     
     .item:hover{
@@ -173,27 +232,59 @@
     .i-left{
       font-size:20px;
       flex-shrink: 0;
+      min-width: 20px;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .item > div:nth-child(2) {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
     }
     
     .i-title{
       font-weight:700; 
-      margin-bottom:4px
+      margin-bottom:4px;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     
     .i-sub{
       font-size:13px; 
-      color:var(--muted)
+      color:var(--muted);
+      min-height: 18px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 1.3;
     }
     
     .chev{
       margin-left:auto; 
       opacity:.5;
       flex-shrink: 0;
+      min-width: 16px;
+      min-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* 로그아웃 */
     .logout-wrap{
-      margin-top:24px
+      margin-top:24px;
+      padding: 0 var(--container-padding);
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .logout{
@@ -208,6 +299,11 @@
       cursor:pointer; 
       transition:all .2s;
       height: var(--button-height);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
     }
     
     .logout:hover{
@@ -235,6 +331,7 @@
       text-align:center;
       max-width:300px; 
       width:90%;
+      box-sizing: border-box;
     }
     
     .dicon{
@@ -248,15 +345,26 @@
       place-items:center;
       margin:0 auto 10px;
       flex-shrink: 0;
+      min-width: 46px;
+      min-height: 46px;
     }
     
     .dialog h3{
-      margin:4px 0 6px
+      margin:4px 0 6px;
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .dialog p{
       margin:0 0 12px; 
-      color:#6b7a93
+      color:#6b7a93;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.4;
     }
 
     /* ===== 반응형 디자인 ===== */
@@ -283,6 +391,8 @@
         width: 56px;
         height: 56px;
         font-size: 24px;
+        min-width: 56px;
+        min-height: 56px;
       }
       
       .who .name {
@@ -291,22 +401,193 @@
       
       .stats {
         gap: 8px;
+        grid-template-columns: 1fr 1fr;
       }
       
       .stat {
         padding: 14px;
+        min-height: 90px;
       }
       
       .item {
         padding: 14px;
+        min-height: 70px;
       }
       
       .logout {
         padding: 14px;
       }
+      
+      /* 모바일에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+      .hero .top {
+        gap: 10px;
+        min-height: 56px;
+      }
+      
+      .who {
+        min-width: 0;
+        overflow: hidden;
+      }
+      
+      .who .name {
+        font-size: 16px;
+        min-height: 24px;
+      }
+      
+      .who .meta {
+        font-size: 11px;
+        min-height: 18px;
+      }
+      
+      /* 모바일에서 통계 카드 최적화 */
+      .stat .badge {
+        font-size: 20px;
+        min-height: 20px;
+      }
+      
+      .stat .num {
+        font-size: 16px;
+        min-height: 20px;
+      }
+      
+      .stat .cap {
+        font-size: 10px;
+        min-height: 14px;
+      }
+      
+      /* 모바일에서 메뉴 아이템 최적화 */
+      .i-left {
+        font-size: 18px;
+        min-width: 18px;
+        min-height: 18px;
+      }
+      
+      .i-title {
+        font-size: 15px;
+        min-height: 18px;
+      }
+      
+      .i-sub {
+        font-size: 12px;
+        min-height: 16px;
+      }
+      
+      .chev {
+        min-width: 14px;
+        min-height: 14px;
+      }
+      
+      /* 모바일 터치 최적화 */
+      .item, .logout, .stat {
+        min-height: 44px; /* 터치 최소 크기 */
+      }
     }
 
     @media (min-width: 481px) and (max-width: 768px) {
+      :root {
+        --container-padding: 20px;
+        --section-gap: 28px;
+        --card-gap: 18px;
+        --border-radius: 18px;
+        --button-height: 52px;
+        --icon-size: 26px;
+      }
+      
+      .hero {
+        padding: 24px 20px 20px;
+      }
+      
+      .section {
+        padding: 28px 20px;
+        gap: 28px;
+      }
+      
+      .avatar {
+        width: 68px;
+        height: 68px;
+        font-size: 30px;
+        min-width: 68px;
+        min-height: 68px;
+      }
+      
+      .who .name {
+        font-size: 19px;
+      }
+      
+      .stats {
+        gap: 14px;
+      }
+      
+      .stat {
+        padding: 18px;
+        min-height: 110px;
+      }
+      
+      .item {
+        padding: 18px;
+        min-height: 85px;
+      }
+      
+      .logout {
+        padding: 18px;
+      }
+      
+      /* 태블릿에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+      .hero .top {
+        gap: 14px;
+        min-height: 68px;
+      }
+      
+      .who .name {
+        font-size: 19px;
+        min-height: 26px;
+      }
+      
+      .who .meta {
+        font-size: 12px;
+        min-height: 20px;
+      }
+      
+      /* 태블릿에서 통계 카드 최적화 */
+      .stat .badge {
+        font-size: 22px;
+        min-height: 22px;
+      }
+      
+      .stat .num {
+        font-size: 17px;
+        min-height: 21px;
+      }
+      
+      .stat .cap {
+        font-size: 11px;
+        min-height: 16px;
+      }
+      
+      /* 태블릿에서 메뉴 아이템 최적화 */
+      .i-left {
+        font-size: 19px;
+        min-width: 19px;
+        min-height: 19px;
+      }
+      
+      .i-title {
+        font-size: 15px;
+        min-height: 19px;
+      }
+      
+      .i-sub {
+        font-size: 13px;
+        min-height: 18px;
+      }
+      
+      .chev {
+        min-width: 15px;
+        min-height: 15px;
+      }
+    }
+
+    @media (min-width: 769px) {
       :root {
         --container-padding: 24px;
         --section-gap: 32px;
@@ -329,10 +610,12 @@
         width: 72px;
         height: 72px;
         font-size: 32px;
+        min-width: 72px;
+        min-height: 72px;
       }
       
       .who .name {
-        font-size: 22px;
+        font-size: 20px;
       }
       
       .stats {
@@ -341,33 +624,86 @@
       
       .stat {
         padding: 20px;
+        min-height: 120px;
       }
       
       .item {
-        padding: 18px;
+        padding: 20px;
+        min-height: 90px;
       }
       
       .logout {
-        padding: 18px;
+        padding: 20px;
+      }
+      
+      /* 데스크탑에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+      .hero .top {
+        gap: 16px;
+        min-height: 72px;
+      }
+      
+      .who .name {
+        font-size: 20px;
+        min-height: 28px;
+      }
+      
+      .who .meta {
+        font-size: 13px;
+        min-height: 22px;
+      }
+      
+      /* 데스크탑에서 통계 카드 최적화 */
+      .stat .badge {
+        font-size: 24px;
+        min-height: 24px;
+      }
+      
+      .stat .num {
+        font-size: 18px;
+        min-height: 22px;
+      }
+      
+      .stat .cap {
+        font-size: 11px;
+        min-height: 16px;
+      }
+      
+      /* 데스크탑에서 메뉴 아이템 최적화 */
+      .i-left {
+        font-size: 20px;
+        min-width: 20px;
+        min-height: 20px;
+      }
+      
+      .i-title {
+        font-size: 16px;
+        min-height: 20px;
+      }
+      
+      .i-sub {
+        font-size: 13px;
+        min-height: 18px;
+      }
+      
+      .chev {
+        min-width: 16px;
+        min-height: 16px;
       }
     }
-
-    @media (min-width: 769px) {
-      :root {
-        --container-padding: 32px;
-        --section-gap: 40px;
-        --card-gap: 24px;
-        --border-radius: 24px;
-        --button-height: 64px;
-        --icon-size: 32px;
+    
+    /* ===== 매우 큰 화면 최적화 ===== */
+    @media (min-width: 1200px) {
+      .app {
+        max-width: 1200px;
+        margin: 0 auto;
       }
       
       .hero {
-        padding: 32px 32px 28px;
+        padding: 32px 28px 28px;
       }
       
       .section {
-        padding: 40px 32px;
+        padding: 40px 28px;
         gap: 40px;
       }
       
@@ -375,10 +711,18 @@
         width: 80px;
         height: 80px;
         font-size: 36px;
+        min-width: 80px;
+        min-height: 80px;
       }
       
       .who .name {
-        font-size: 24px;
+        font-size: 22px;
+        min-height: 30px;
+      }
+      
+      .who .meta {
+        font-size: 14px;
+        min-height: 24px;
       }
       
       .stats {
@@ -387,14 +731,227 @@
       
       .stat {
         padding: 24px;
+        min-height: 130px;
       }
       
       .item {
-        padding: 20px;
+        padding: 24px;
+        min-height: 100px;
       }
       
       .logout {
-        padding: 20px;
+        padding: 24px;
+      }
+      
+      /* 매우 큰 화면에서 헤더 요소들이 화면 너비에 맞게 확장되도록 */
+      .hero .top {
+        gap: 20px;
+        min-height: 80px;
+      }
+      
+      /* 매우 큰 화면에서 통계 카드 최적화 */
+      .stat .badge {
+        font-size: 26px;
+        min-height: 26px;
+      }
+      
+      .stat .num {
+        font-size: 20px;
+        min-height: 24px;
+      }
+      
+      .stat .cap {
+        font-size: 12px;
+        min-height: 18px;
+      }
+      
+      /* 매우 큰 화면에서 메뉴 아이템 최적화 */
+      .i-left {
+        font-size: 22px;
+        min-width: 22px;
+        min-height: 22px;
+      }
+      
+      .i-title {
+        font-size: 17px;
+        min-height: 22px;
+      }
+      
+      .i-sub {
+        font-size: 14px;
+        min-height: 20px;
+      }
+      
+      .chev {
+        min-width: 18px;
+        min-height: 18px;
+      }
+    }
+    
+    /* ===== 모바일 터치 최적화 ===== */
+    @media (hover: none) and (pointer: coarse) {
+      /* 터치 디바이스에서 호버 효과 제거 */
+      .item:hover, .stat:hover, .logout:hover {
+        transform: none;
+        box-shadow: var(--shadow);
+      }
+      
+      /* 터치 디바이스에서 활성 상태 스타일 */
+      .item:active, .stat:active, .logout:active {
+        transform: scale(0.98);
+        opacity: 0.8;
+      }
+      
+      /* 터치 디바이스에서 포커스 스타일 강화 */
+      .item:focus, .stat:focus, .logout:focus {
+        outline: 2px solid var(--blue);
+        outline-offset: 2px;
+      }
+    }
+    
+    /* ===== 세로 모드 최적화 ===== */
+    @media (orientation: portrait) and (max-width: 480px) {
+      .hero {
+        padding: 16px 16px 14px;
+      }
+      
+      .section {
+        padding: 16px 16px;
+        gap: 16px;
+      }
+      
+      .avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        min-width: 48px;
+        min-height: 48px;
+      }
+      
+      .who .name {
+        font-size: 16px;
+      }
+      
+      .stats {
+        gap: 6px;
+      }
+      
+      .stat {
+        padding: 12px;
+        min-height: 80px;
+      }
+      
+      .item {
+        padding: 12px;
+        min-height: 60px;
+      }
+      
+      .logout {
+        padding: 12px;
+      }
+    }
+    
+    /* ===== 가로 모드 최적화 ===== */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .hero {
+        padding: 16px var(--container-padding) 12px;
+      }
+      
+      .section {
+        padding: 20px var(--container-padding);
+        gap: 20px;
+      }
+      
+      .avatar {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+        min-width: 56px;
+        min-height: 56px;
+      }
+      
+      .who .name {
+        font-size: 18px;
+        min-height: 24px;
+      }
+      
+      .who .meta {
+        font-size: 11px;
+        min-height: 18px;
+      }
+      
+      .stats {
+        gap: 10px;
+        margin-top: 12px;
+      }
+      
+      .stat {
+        padding: 14px;
+        min-height: 90px;
+      }
+      
+      .item {
+        padding: 14px;
+        min-height: 70px;
+        margin-bottom: 6px;
+      }
+      
+      .logout {
+        padding: 14px;
+      }
+    }
+    
+    /* ===== 작은 화면에서의 그리드 최적화 ===== */
+    @media (max-width: 360px) {
+      .hero {
+        padding: 16px 12px 14px;
+      }
+      
+      .section {
+        padding: 16px 12px;
+        gap: 16px;
+      }
+      
+      .avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        min-width: 48px;
+        min-height: 48px;
+      }
+      
+      .who .name {
+        font-size: 16px;
+      }
+      
+      .stats {
+        gap: 6px;
+      }
+      
+      .stat {
+        padding: 12px;
+        min-height: 80px;
+      }
+      
+      .item {
+        padding: 12px;
+        min-height: 60px;
+      }
+      
+      .logout {
+        padding: 12px;
+      }
+      
+      /* 매우 작은 화면에서 아이콘 크기 조정 */
+      .i-left {
+        font-size: 18px;
+        min-width: 18px;
+        min-height: 18px;
+      }
+      
+      .chev {
+        min-width: 14px;
+        min-height: 14px;
       }
     }
   </style>

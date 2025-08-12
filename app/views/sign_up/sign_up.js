@@ -45,7 +45,7 @@ export async function render(){
     <div class="wrap">
       <section class="panel" aria-label="회원가입 양식">
         <h1>계정 만들기</h1>
-        <p class="sub">AI-Go 회원이 되어 더 많은 기능을 이용하세요</p>
+        <p class="sub">아이-고 회원이 되어 더 많은 기능을 이용하세요</p>
 
         <form id="sg-form" novalidate>
           <div class="field">

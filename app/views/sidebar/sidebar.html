@@ -99,6 +99,46 @@
     font-size: 18px;
   }
   
+  /* ===== 로고 이미지 스타일 ===== */
+  .brand .logo-img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    min-width: 24px;
+    min-height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* 흰색으로 변경 */
+  }
+  
+  .brand .brand-text {
+    color: #fff;
+    font-weight: 900;
+    font-size: 18px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .foot .ver .logo-img-small {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    min-width: 16px;
+    min-height: 16px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* 흰색으로 변경 */
+    margin-right: 8px;
+  }
+  
+  .foot .ver {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
   .content{
     padding: var(--section-gap) var(--container-padding);
     display: flex;
@@ -574,14 +614,8 @@
       <div class="header">
         <div class="header-top">
           <div class="brand" id="drawerTitle">
-            <span class="badge">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
-                <rect x="3" y="8" width="18" height="8" rx="2"></rect>
-                <circle cx="8" cy="17" r="2" fill="#fff" stroke="none"></circle>
-                <circle cx="16" cy="17" r="2" fill="#fff" stroke="none"></circle>
-              </svg>
-            </span>
-            아이-고
+            <img src="img/ai-go-logo.png" alt="아이-고" class="logo-img">
+            <span class="brand-text">아이-고</span>
           </div>
           <button id="closeDrawerBtn" class="btn-x" aria-label="닫기">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 6l12 12M18 6l-12 12"/></svg>
@@ -641,7 +675,10 @@
       </nav>
 
       <div class="foot">
-        <div class="ver">AI-Go v1.0</div>
+        <div class="ver">
+          <img src="img/ai-go-logo.png" alt="아이-고" class="logo-img-small">
+          <span>아이-고 v1.0</span>
+        </div>
         <div>안전한 운전을 위한 스마트 학습</div>
       </div>
     </aside>
