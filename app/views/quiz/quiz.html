@@ -63,12 +63,16 @@
     justify-content: space-between;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .row{
     display: flex; 
     align-items: center; 
     gap: 12px;
+    flex: 1;
+    min-width: 0;
   }
   
   .btn-ic{
@@ -81,6 +85,7 @@
     place-items: center;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    min-height: 44px;
   }
   
   .btn-ic:hover {
@@ -95,6 +100,9 @@
     gap: 12px; 
     font-weight: 900;
     font-size: 18px;
+    flex: 1;
+    min-width: 0;
+    flex-shrink: 1;
   }
   
   .title .book{
@@ -117,6 +125,8 @@
     padding: 8px 16px; 
     border-radius: 24px; 
     background: #fff;
+    flex-shrink: 0;
+    max-width: 200px;
   }
   
   .chip-user .dot{
@@ -137,6 +147,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   /* ===== 카드/버튼 ===== */
@@ -146,6 +158,8 @@
     border-radius: 22px; 
     box-shadow: var(--shadow); 
     padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .panel h2{
@@ -168,6 +182,9 @@
     box-shadow: var(--shadow);
     transition: all 0.2s ease;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
   }
   
   .pill:hover {
@@ -183,16 +200,22 @@
     display: flex; 
     flex-direction: column;
     gap: 4px;
+    flex: 1;
+    min-width: 0;
   }
   
   .pill .name{
     font-weight: 900;
     font-size: 18px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .pill .desc{
     font-size: 14px; 
     color: #6b7a93; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .pill .chev{
@@ -218,6 +241,8 @@
     font-size: 14px;
     color: var(--muted);
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* ===== 버튼 ===== */
@@ -230,6 +255,7 @@
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-height: 44px;
   }
   
   .btn-primary{
@@ -258,6 +284,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .view[hidden]{
@@ -277,6 +305,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .play-btn{
@@ -291,6 +321,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    min-height: 44px;
   }
 
   .play-btn:hover {
@@ -306,10 +337,16 @@
     border: 1px solid var(--line);
     border-radius: var(--border-radius);
     padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   .progress-item{
     text-align: center;
+    flex: 1;
+    min-width: 0;
   }
 
   .progress-item .num{
@@ -322,6 +359,8 @@
     font-size: 12px;
     color: var(--muted);
     margin-top: 4px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* ===== 퀴즈 뷰 ===== */
@@ -331,6 +370,8 @@
     border-radius: var(--border-radius);
     padding: 20px;
     margin-bottom: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .quiz-progress{
@@ -338,6 +379,7 @@
     align-items: center;
     gap: 12px;
     margin-bottom: 16px;
+    width: 100%;
   }
 
   .progress-bar{
@@ -346,6 +388,7 @@
     background: var(--bg);
     border-radius: 4px;
     overflow: hidden;
+    min-width: 0;
   }
 
   .progress-fill{
@@ -359,6 +402,7 @@
     font-weight: 700;
     color: var(--blue);
     min-width: 40px;
+    flex-shrink: 0;
   }
 
   .quiz-timer{
@@ -374,6 +418,8 @@
     border-radius: var(--border-radius);
     padding: 24px;
     margin-bottom: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .question-title{
@@ -381,12 +427,15 @@
     font-weight: 800;
     margin-bottom: 20px;
     line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .options{
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
   }
 
   .option{
@@ -399,6 +448,9 @@
     background: #fff;
     cursor: pointer;
     transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
   }
 
   .option:hover {
@@ -433,11 +485,15 @@
     flex: 1;
     font-size: 16px;
     line-height: 1.4;
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .quiz-actions{
     display: flex;
     gap: 12px;
+    width: 100%;
   }
 
   .quiz-actions button{
@@ -449,6 +505,7 @@
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-height: 44px;
   }
 
   .btn-next{
@@ -480,6 +537,8 @@
     padding: 24px;
     text-align: center;
     margin-bottom: var(--section-gap);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .score-display{
@@ -494,6 +553,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 24px;
+    width: 100%;
   }
 
   .stat-item{
@@ -510,6 +570,8 @@
     font-size: 12px;
     color: var(--muted);
     margin-top: 4px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .wrong-answers{
@@ -517,6 +579,8 @@
     border: 1px solid var(--line);
     border-radius: var(--border-radius);
     padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .wrong-answers h3{
@@ -531,6 +595,8 @@
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 16px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .wrong-card .head{
@@ -558,6 +624,8 @@
     margin-top: 12px;
     font-size: 14px;
     color: var(--muted);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* ===== 모달 ===== */
@@ -587,6 +655,23 @@
     overflow-y: auto;
   }
 
+  /* ===== 페이지 전환 애니메이션 ===== */
+  .view {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .view.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  .view.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* ===== 반응형 디자인 ===== */
   @media (max-width: 480px) {
     :root {
@@ -596,6 +681,20 @@
       --border-radius: 16px;
       --button-height: 48px;
       --icon-size: 24px;
+    }
+    
+    .topbar {
+      padding: 12px var(--container-padding);
+    }
+    
+    .title {
+      font-size: 16px;
+      gap: 8px;
+    }
+    
+    .title .book {
+      width: 28px;
+      height: 28px;
     }
     
     .panel {
@@ -621,6 +720,15 @@
     .stats-grid {
       gap: 12px;
     }
+    
+    .progress-info {
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .progress-item {
+      flex: none;
+    }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
@@ -631,6 +739,15 @@
       --border-radius: 20px;
       --button-height: 56px;
       --icon-size: 28px;
+    }
+    
+    .topbar {
+      padding: 20px var(--container-padding);
+    }
+    
+    .title {
+      font-size: 20px;
+      gap: 12px;
     }
     
     .panel {
@@ -668,6 +785,15 @@
       --icon-size: 32px;
     }
     
+    .topbar {
+      padding: 24px var(--container-padding);
+    }
+    
+    .title {
+      font-size: 22px;
+      gap: 16px;
+    }
+    
     .panel {
       padding: 40px;
     }
@@ -692,6 +818,32 @@
       gap: 32px;
     }
   }
+
+  @media (orientation: portrait) {
+    .progress-info {
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .progress-item {
+      flex: none;
+    }
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    .topbar {
+      padding: 12px var(--container-padding);
+    }
+    
+    .page {
+      padding: 16px var(--container-padding);
+      gap: 16px;
+    }
+    
+    .panel {
+      padding: 20px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -699,9 +851,9 @@
     <!-- 상단바 -->
     <header class="topbar">
       <div class="row">
-        <button class="btn-ic" aria-label="뒤로가기" title="뒤로가기">
+        <button class="btn-ic" id="openDrawer" aria-label="메뉴 열기" title="메뉴 열기">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
+            <path d="M3 12h18M3 6h18M3 18h18"/>
           </svg>
         </button>
         <div class="title">
@@ -711,7 +863,7 @@
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
           </span>
-          운전면허 퀴즈
+          <span id="pageTitle">운전면허 퀴즈</span>
         </div>
       </div>
 
@@ -782,28 +934,16 @@
           <div class="label">전체 문제</div>
         </div>
         <div class="progress-item">
-          <div class="num" id="qTotal2">2</div>
-          <div class="label">전체 문제</div>
-        </div>
-        <div class="progress-item">
-          <div class="num" id="qNoA">1</div>
+          <div class="num" id="qCurrent">1</div>
           <div class="label">현재 문제</div>
         </div>
         <div class="progress-item">
-          <div class="num" id="qNoB">1</div>
-          <div class="label">현재 문제</div>
-        </div>
-        <div class="progress-item">
-          <div class="num" id="qNoC">1</div>
-          <div class="label">현재 문제</div>
-        </div>
-        <div class="progress-item">
-          <div class="num" id="qNoD">1</div>
-          <div class="label">현재 문제</div>
+          <div class="num" id="qLevel">초급</div>
+          <div class="label">선택 난이도</div>
         </div>
       </div>
 
-      <button class="btn-primary" id="toQuestion">퀴즈 시작하기</button>
+      <button class="btn-primary" id="toQuestion">문제 보기</button>
       <button class="btn-secondary" id="backToLevel">난이도 다시 선택</button>
     </div>
 
@@ -815,12 +955,6 @@
             <div class="progress-fill" id="progressBar" style="width: 0%"></div>
           </div>
           <div class="progress-text" id="progressText">0%</div>
-        </div>
-        <div class="quiz-progress">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressBar2" style="width: 0%"></div>
-          </div>
-          <div class="progress-text" id="progressText2">0%</div>
         </div>
         <div class="quiz-timer" id="timer">0.0</div>
       </div>
@@ -834,7 +968,7 @@
 
       <div class="quiz-actions">
         <button class="btn-back" id="backToVideo">뒤로가기</button>
-        <button class="btn-next" id="btnNext">다음</button>
+        <button class="btn-next" id="btnNext" disabled>다음</button>
       </div>
     </div>
 
@@ -854,16 +988,6 @@
           <div class="stat-item">
             <div class="num" id="statTime">0분 0초</div>
             <div class="label">소요 시간</div>
-          </div>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="num" id="statCorrect">0</div>
-            <div class="label">정답</div>
-          </div>
-          <div class="stat-item">
-            <div class="num" id="statWrong">0</div>
-            <div class="label">오답</div>
           </div>
         </div>
       </div>
