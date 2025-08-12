@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>아이-고 · 메인</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --blue:#246bff;
+      --blue-700:#1e5af2;
+      --blue-050:#eef4ff;
+      --green:#11b37c;
+      --yellow:#f59e0b;
+      --rose:#ef4444;
+      --line:#e6e8ee;
+      --chip:#eef2ff;
+      --radius-xl:16px;
+      --radius-2xl:22px;
+      --shadow:0 6px 24px rgba(15,23,42,0.06);
+      
+      /* 모바일 웹 표준 여백 시스템 */
+      --container-padding: 16px;
+      --section-gap: 24px;
+      --card-gap: 16px;
+      --border-radius: 16px;
+      --button-height: 48px;
+      --icon-size: 24px;
+    }
+    
+    *{box-sizing:border-box}
+    
+    html,body{
+      height:100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body{
+      font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* 모바일 웹 표준 앱 컨테이너 */
+    .app{
+      width: 100%;
+      min-height: 100vh;
+      background:var(--bg);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 상단바 */
+    .topbar{
+      padding: 16px var(--container-padding);
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      background: #fff; 
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .topbar .row{
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
+    }
+    
+    .topbar .logo{
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
+      font-size: 18px; 
+      font-weight: 800; 
+      color: var(--text);
+    }
+    
+    .topbar .logo-badge{
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      width: 40px; 
+      height: 40px; 
+      border-radius: 12px; 
+      background: var(--blue-050);
+      flex-shrink: 0;
+    }
+    
+    .topbar .chip{
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
+      padding: 8px 16px; 
+      border-radius: 24px; 
+      background: var(--blue-050);
+      border: 1px solid var(--blue-050);
+    }
+    
+    .topbar .avatar{
+      width: 32px; 
+      height: 32px; 
+      border-radius: 50%; 
+      background: var(--blue);
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #fff; 
+      font-size: 14px; 
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ============ 컨텐츠 패딩 ============ */
+    .content{
+      padding: var(--section-gap) var(--container-padding);
+      display: flex;
+      flex-direction: column;
+      gap: var(--section-gap);
+    }
+
+    /* 상단 리본 */
+    .ribbon{
+      display: inline-block; 
+      padding: 8px 16px; 
+      border-radius: 24px;
+      background: #eef7ff; 
+      color: #2b73ff; 
+      font-weight: 700; 
+      font-size: 14px;
+      border: 1px solid #d6e6ff;
+      align-self: flex-start;
+    }
+
+    /* 인사 블록 */
+    .hello{
+      display: flex; 
+      gap: 16px; 
+      margin: 0;
+    }
+    
+    .hello .mark{
+      width: 56px; 
+      height: 56px; 
+      border-radius: 16px; 
+      background: #eaf1ff;
+      display: grid; 
+      place-items: center; 
+      color: #2b73ff; 
+      font-weight: 900; 
+      font-size: 24px;
+      border: 1px solid #d8e4ff;
+      flex-shrink: 0;
+    }
+    
+    .hello h1{
+      margin: 0; 
+      line-height: 1.3; 
+      font-size: 24px; 
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    
+    .hello .name{color: #2b73ff}
+    .subtle{color: var(--muted); font-size: 14px}
+
+    /* ============ 카드 그리드 (학습 현황) ============ */
+    .section-title{
+      margin: 0 0 16px 0; 
+      font-weight: 800; 
+      font-size: 18px;
+      color: var(--text);
+    }
+    
+    .grid{
+      display: grid; 
+      gap: var(--card-gap);
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    
+    .card{
+      background: var(--card); 
+      border: 1px solid var(--line); 
+      border-radius: var(--radius-xl); 
+      box-shadow: var(--shadow); 
+      padding: 20px;
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px; 
+      min-height: 120px;
+      transition: all 0.2s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(15,23,42,0.1);
+    }
+    
+    .card .head{
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      color: var(--muted); 
+      font-size: 14px; 
+      font-weight: 600;
+    }
+    
+    .card .badge{
+      padding: 4px 12px; 
+      font-size: 12px; 
+      border-radius: 16px; 
+      border: 1px solid var(--line); 
+      background: #fafbff; 
+      color: #6b7280;
+    }
+    
+    .card .value{
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
+      font-weight: 800; 
+      font-size: 28px; 
+      letter-spacing: -0.02em;
+    }
+    
+    .icon{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: #fafbff;
+      flex-shrink: 0;
+    }
+    
+    .icon.trophy{color: #d97706; background: #fff7ed}
+    .icon.target{color: #10b981; background: #ecfdf5}
+    .icon.streak{color: #3b82f6; background: #eff6ff}
+    .icon.clock{color: #a855f7; background: #faf5ff}
+
+    /* ============ 이번 주 학습 ============ */
+    .week-card{
+      background: var(--card); 
+      border: 1px solid var(--line); 
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow); 
+      padding: 24px; 
+      margin: 0;
+    }
+    
+    .week-top{
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      margin-bottom: 16px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .bar{
+      height: 8px; 
+      background: #eef2ff; 
+      border-radius: 4px; 
+      position: relative; 
+      overflow: hidden;
+    }
+    
+    .bar > i{
+      position: absolute; 
+      inset: 0; 
+      width: 75%; 
+      background: linear-gradient(90deg, var(--blue), var(--blue-700));
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    .weekday{
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      gap: 8px; 
+      margin-top: 20px;
+    }
+    
+    .weekday .dot{
+      width: 40px; 
+      height: 40px; 
+      border-radius: 50%; 
+      display: grid; 
+      place-items: center;
+      border: 1px solid var(--line); 
+      background: #fff; 
+      color: var(--muted); 
+      font-size: 14px; 
+      font-weight: 700;
+      flex: 1;
+      max-width: 40px;
+    }
+    
+    .weekday .dot.done{
+      background: #f0f7ff; 
+      color: var(--blue); 
+      border-color: #cfe0ff;
+    }
+    
+    .weekday .dot.today{
+      border-width: 2px; 
+      border-color: var(--blue);
+    }
+    
+    .weekday .dot .check{
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--blue); 
+      color: #fff; 
+      display: grid;
+      place-items: center; 
+      font-size: 12px; 
+      font-weight: 900;
+    }
+
+    /* ============ 빠른 실행 ============ */
+    .list{
+      display: flex; 
+      flex-direction: column; 
+      gap: var(--card-gap); 
+      margin: 0;
+    }
+    
+    .tile{
+      display: flex; 
+      align-items: center; 
+      gap: 16px;
+      padding: 20px; 
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--line); 
+      background: #eff6ff;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15,23,42,0.1);
+    }
+    
+    .tile.red{background: #fff3f3; border-color: #ffe0e0}
+    .tile.purple{background: #f5f3ff; border-color: #ece9ff}
+    
+    .tile .leading{
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px solid var(--line); 
+      background: #fff; 
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+    }
+    
+    .tile .txt{flex: 1}
+    .tile .txt .title{font-weight: 800; font-size: 18px; margin-bottom: 4px;}
+    .tile .txt .sub{font-size: 14px; color: var(--muted);}
+    
+    .chev{
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    /* 작은 캡션들 */
+    .mini{font-size: 12px; color: #7c899a; font-weight: 700}
+    
+    /* 모바일 웹 표준 레이아웃 */
+    @media (max-width: 480px) {
+      :root {
+        --container-padding: 16px;
+        --section-gap: 20px;
+        --card-gap: 12px;
+      }
+      
+      .content {
+        padding: var(--section-gap) var(--container-padding);
+        gap: var(--section-gap);
+      }
+      
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--card-gap);
+      }
+      
+      .card {
+        padding: 16px;
+        min-height: 100px;
+      }
+      
+      .week-card {
+        padding: 20px;
+      }
+      
+      .weekday .dot {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+      }
+      
+      .hello h1 {
+        font-size: 20px;
+      }
+      
+      .hello .mark {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+      :root {
+        --container-padding: 24px;
+        --section-gap: 32px;
+        --card-gap: 20px;
+      }
+      
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--card-gap);
+      }
+    }
+    
+    @media (min-width: 769px) {
+      :root {
+        --container-padding: 32px;
+        --section-gap: 40px;
+        --card-gap: 24px;
+      }
+      
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--card-gap);
+      }
+      
+      .card {
+        padding: 24px;
+        min-height: 140px;
+      }
+      
+      .week-card {
+        padding: 32px;
+      }
+      
+      .tile {
+        padding: 24px;
+      }
+      
+      .tile .leading {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <!-- 상단바 -->
+    <header class="topbar">
+      <div class="row">
+        <button class="btn-icon" aria-label="메뉴" title="메뉴">
+          <!-- 햄버거 -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+        </button>
+        <div class="logo">
+          <span class="logo-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b73ff" stroke-width="2">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M8 13l2 2 4-4"></path>
+            </svg>
+          </span>
+          <span>아이-고</span>
+        </div>
+      </div>
+
+      <div class="chip">
+        <span class="avatar">김</span>
+        <span>김운전</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <span class="ribbon">스마트 운전 교육 플랫폼</span>
+
+      <!-- 인사 -->
+      <div class="hello">
+        <div class="mark">?</div>
+        <div>
+          <h1>
+            안녕하세요 <span class="name">김운전</span>님<br/>
+            오늘도 안전 운전하세요
+          </h1>
+        </div>
+      </div>
+
+      <div class="section-title">학습 현황</div>
+
+      <!-- 상단 지표 카드 -->
+      <div class="grid">
+        <!-- 완료한 퀴즈 -->
+        <div class="card">
+          <div class="head">
+            <span>완료한 퀴즈</span>
+            <span class="badge">+3개</span>
+          </div>
+          <div class="value">
+            <div class="icon trophy">🏆</div>
+            <span>47</span>
+          </div>
+        </div>
+
+        <!-- 정답률 -->
+        <div class="card">
+          <div class="head">
+            <span>정답률</span>
+            <span class="badge">+2%</span>
+          </div>
+          <div class="value">
+            <div class="icon target">🎯</div>
+            <span>89%</span>
+          </div>
+        </div>
+
+        <!-- 연속 학습 -->
+        <div class="card">
+          <div class="head">
+            <span>연속 학습</span>
+            <span class="badge">+1일</span>
+          </div>
+          <div class="value">
+            <div class="icon streak">📈</div>
+            <span>12일</span>
+          </div>
+        </div>
+
+        <!-- 총 학습시간 -->
+        <div class="card">
+          <div class="head">
+            <span>총 학습시간</span>
+            <span class="badge">+2시간</span>
+          </div>
+          <div class="value">
+            <div class="icon clock">🕒</div>
+            <span>24시간</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 이번 주 학습 -->
+      <div class="section-title">이번 주 학습</div>
+      <div class="week-card">
+        <div class="week-top">
+          <span class="mini">주간 목표 달성률</span>
+          <strong>75%</strong>
+        </div>
+        <div class="bar"><i></i></div>
+
+        <div class="weekday">
+          <div class="dot done">월</div>
+          <div class="dot done">화</div>
+          <div class="dot done">수</div>
+          <div class="dot done">목</div>
+          <div class="dot today">금</div>
+          <div class="dot"><span class="check">✓</span></div>
+          <div class="dot">일</div>
+        </div>
+      </div>
+
+      <!-- 빠른 실행 -->
+      <div class="section-title">빠른 실행</div>
+      <div class="list">
+        <a class="tile" href="#/quiz">
+          <div class="leading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+          <div class="txt">
+            <div class="title">퀴즈 시작하기</div>
+            <div class="sub">새로운 문제로 실력을 테스트 해보세요</div>
+          </div>
+          <div class="chev">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
+          </div>
+        </a>
+
+        <a class="tile red" href="#/wrong">
+          <div class="leading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16v16H4z"></path>
+              <path d="M8 8h8M8 12h8M8 16h5"></path>
+            </svg>
+          </div>
+          <div class="txt">
+            <div class="title">오답노트 보기</div>
+            <div class="sub">틀린 문제들을 다시 복습해보세요</div>
+          </div>
+          <div class="chev">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
+          </div>
+        </a>
+
+        <a class="tile purple" href="#/analytics">
+          <div class="leading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <path d="M7 13h2v5H7zM11 9h2v9h-2zM15 6h2v12h-2z"></path>
+            </svg>
+          </div>
+          <div class="txt">
+            <div class="title">학습 분석</div>
+            <div class="sub">상세한 학습 통계를 확인해보세요</div>
+          </div>
+          <div class="chev">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

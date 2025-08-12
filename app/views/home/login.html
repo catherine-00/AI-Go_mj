@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>아이-고 · 로그인</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --blue:#246bff;
+      --blue-700:#1e5af2;
+      --blue-050:#eef4ff;
+      --green:#10b981;
+      --orange:#f97316;
+      --line:#e6e8ee;
+      --chip:#eef2ff;
+      --radius-xl:16px;
+      --radius-2xl:22px;
+      --shadow:0 6px 24px rgba(15,23,42,0.06);
+      --focus:0 0 0 3px rgba(36,107,255,.18);
+      
+      /* 모바일 웹 표준 여백 시스템 */
+      --container-padding: 16px;
+      --section-gap: 24px;
+      --card-gap: 16px;
+      --border-radius: 16px;
+      --button-height: 48px;
+      --icon-size: 24px;
+    }
+    
+    *{box-sizing:border-box}
+    
+    html,body{
+      height:100%;
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body{
+      font-family:"Pretendard","Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg); 
+      color:var(--text);
+    }
+    
+    .app{
+      width: 100%;
+      min-height: 100vh; 
+      background:var(--bg); 
+      display:flex; 
+      flex-direction:column;
+    }
+
+    /* 상단바 */
+    .topbar{
+      position:sticky; 
+      top:0; 
+      background:#fff; 
+      border-bottom:1px solid var(--line);
+      padding: 16px var(--container-padding); 
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      z-index:10;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .btn-icon{
+      width: 40px;
+      height: 40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      display:grid;
+      place-items:center;
+      background:#fff;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    
+    .btn-icon:hover {
+      background: var(--bg);
+      border-color: var(--blue);
+      transform: translateY(-1px);
+    }
+    
+    .logo{
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+      font-weight:800; 
+      font-size:18px; 
+      color:var(--blue)
+    }
+    
+    .logo-badge{
+      width: 28px;
+      height: 28px;
+      border-radius:999px;
+      background:var(--blue-050);
+      display:grid;
+      place-items:center;
+      flex-shrink: 0;
+    }
+    
+    .link-login{
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+      color:#1f2a44; 
+      font-weight:700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .link-login:hover {
+      color: var(--blue);
+      transform: translateY(-1px);
+    }
+    
+    .avatar{
+      width: 22px;
+      height: 22px;
+      border-radius:999px;
+      background:var(--blue);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:12px;
+      font-weight:800;
+      flex-shrink: 0;
+    }
+
+    .content{
+      padding: var(--section-gap) var(--container-padding) 28px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--section-gap);
+    }
+    
+    .ribbon{
+      display:inline-block; 
+      padding:8px 12px; 
+      border-radius:999px; 
+      background:#eef7ff; 
+      color:#2b73ff; 
+      font-weight:700; 
+      font-size:12px; 
+      border:1px solid #d6e6ff;
+      align-self: flex-start;
+    }
+
+    /* 헤더/타이틀 */
+    .hello{
+      display:flex; 
+      gap:12px; 
+      margin:12px 0 4px;
+      align-items: flex-start;
+    }
+    
+    .hello .mark{
+      width: 46px;
+      height: 46px;
+      border-radius:14px;
+      background:#eaf1ff;
+      display:grid;
+      place-items:center;
+      color:#2b73ff;
+      font-weight:900;
+      font-size:22px;
+      border:1px solid #d8e4ff;
+      flex-shrink: 0;
+    }
+    
+    h1{
+      margin:0; 
+      line-height:1.35; 
+      font-size:22px; 
+      font-weight:900
+    }
+    
+    h1 u{text-underline-offset:6px}
+
+    /* 폼 */
+    .form{
+      margin-top:12px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .input{
+      display:flex; 
+      align-items:center; 
+      gap:10px;
+      background:#fff; 
+      border:1px solid var(--line); 
+      border-radius:16px; 
+      padding:16px;
+      box-shadow:var(--shadow);
+      transition: all 0.2s ease;
+    }
+    
+    .input:focus-within{
+      box-shadow:var(--shadow), var(--focus); 
+      border-color:#cfe0ff;
+      transform: translateY(-1px);
+    }
+    
+    .input input{
+      border:none; 
+      outline:none; 
+      width:100%; 
+      background:transparent; 
+      font-size:14px; 
+      color:var(--text)
+    }
+    
+    .field-foot{
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      margin:8px 4px 14px; 
+      color:var(--muted); 
+      font-size:12px
+    }
+    
+    .remember{
+      display:flex; 
+      align-items:center; 
+      gap:8px
+    }
+    
+    .remember input{
+      appearance: none;
+      width:16px;
+      height:16px;
+      border:1.6px solid #c7cfe0;
+      border-radius:4px;
+      display:inline-block;
+      position:relative;
+      cursor: pointer;
+    }
+    
+    .remember input:checked{
+      background:var(--blue); 
+      border-color:var(--blue)
+    }
+    
+    .remember input:checked::after{
+      content:""; 
+      position:absolute; 
+      left:4px; 
+      top:1px; 
+      width:6px; 
+      height:10px; 
+      border:2px solid #fff; 
+      border-top:none; 
+      border-left:none; 
+      transform:rotate(45deg)
+    }
+    
+    .link{
+      color:#49618a; 
+      text-decoration:none;
+      transition: color 0.2s ease;
+    }
+    
+    .link:hover {
+      color: var(--blue);
+    }
+    
+    .btn-primary{
+      width:100%; 
+      border:none; 
+      border-radius:16px; 
+      padding:16px; 
+      background:linear-gradient(90deg,var(--blue),var(--blue-700));
+      color:#fff; 
+      font-weight:900; 
+      font-size:16px; 
+      cursor:pointer; 
+      box-shadow:0 8px 24px rgba(36,107,255,.25);
+      transition: all 0.2s ease;
+      height: var(--button-height);
+    }
+    
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 32px rgba(36,107,255,.35);
+    }
+    
+    .btn-primary:active{
+      transform:translateY(1px)
+    }
+    
+    .signup{
+      margin-top:10px; 
+      text-align:center; 
+      color:#445; 
+      font-size:14px
+    }
+    
+    .signup a{
+      color:var(--blue); 
+      font-weight:800; 
+      text-decoration:none;
+      transition: color 0.2s ease;
+    }
+    
+    .signup a:hover {
+      color: var(--blue-700);
+    }
+
+    /* 일러스트 박스 */
+    .illu-wrap{
+      display:grid; 
+      place-items:center; 
+      margin:18px 0 6px
+    }
+    
+    .car-illu{
+      width:210px;
+      height:150px;
+      border-radius:20px;
+      background:#eaf3ff;
+      border:1px solid #d9e6ff;
+      display:grid; 
+      place-items:center; 
+      box-shadow:var(--shadow);
+      transition: all 0.2s ease;
+    }
+    
+    .car-illu:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(15,23,42,0.1);
+    }
+
+    /* 섹션 제목/설명 */
+    .title2{
+      font-size:18px; 
+      font-weight:900; 
+      margin:18px 0 6px
+    }
+    
+    .desc{
+      color:#5b6b80; 
+      font-size:13px; 
+      line-height:1.6
+    }
+
+    /* 특징 타일 */
+    .list{
+      display:flex; 
+      flex-direction:column; 
+      gap:12px; 
+      margin-top:12px
+    }
+    
+    .tile{
+      display:flex; 
+      align-items:flex-start; 
+      gap:12px; 
+      padding:16px; 
+      background:#fff; 
+      border:1px solid var(--line);
+      border-radius:16px; 
+      box-shadow:var(--shadow);
+      transition: all 0.2s ease;
+    }
+    
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(15,23,42,0.1);
+    }
+    
+    .lead{
+      width: 36px;
+      height: 36px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line); 
+      background:#fafbff;
+      flex-shrink: 0;
+    }
+    
+    .lead.blue{color:var(--blue); background:#eff6ff}
+    .lead.green{color:var(--green); background:#ecfdf5}
+    .lead.purple{color:#7c3aed; background:#f5f3ff}
+    .lead.orange{color:var(--orange); background:#fff7ed}
+    
+    .tile .t{font-weight:800}
+    .tile .s{font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* CTA */
+    .cta{
+      margin:18px 0 32px; 
+      border-radius:22px; 
+      padding:22px; 
+      background:linear-gradient(180deg,#1f66ff,#1460ff);
+      color:#fff; 
+      text-align:center; 
+      box-shadow:0 10px 30px rgba(36,107,255,.35);
+      transition: all 0.2s ease;
+    }
+    
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(36,107,255,.4);
+    }
+    
+    .cta h3{margin:0 0 8px; font-size:20px; font-weight:900}
+    .cta p{margin:0; opacity:.95; font-size:14px; line-height:1.6}
+    
+    .cta .cta-btn{
+      display:inline-flex; 
+      align-items:center; 
+      gap:8px; 
+      margin-top:16px;
+      padding:12px 16px; 
+      background:#fff; 
+      color:#0f55ff; 
+      border-radius:999px; 
+      font-weight:900; 
+      border:1px solid #eaf0ff; 
+      text-decoration:none;
+      transition: all 0.2s ease;
+    }
+    
+    .cta .cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.3);
+    }
+
+    /* 접근성용 포커스 */
+    a:focus, button:focus, input:focus{outline:var(--focus)}
+
+    /* ===== 반응형 디자인 ===== */
+    @media (max-width: 480px) {
+      :root {
+        --container-padding: 16px;
+        --section-gap: 20px;
+        --card-gap: 12px;
+        --border-radius: 16px;
+        --button-height: 48px;
+        --icon-size: 24px;
+      }
+      
+      .content {
+        padding: 20px 16px 24px;
+        gap: 20px;
+      }
+      
+      .topbar {
+        padding: 16px 16px;
+      }
+      
+      .btn-icon {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .hello .mark {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+      
+      h1 {
+        font-size: 20px;
+      }
+      
+      .input {
+        padding: 14px;
+      }
+      
+      .car-illu {
+        width: 180px;
+        height: 130px;
+      }
+      
+      .tile {
+        padding: 14px;
+      }
+      
+      .cta {
+        padding: 20px;
+      }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      :root {
+        --container-padding: 24px;
+        --section-gap: 32px;
+        --card-gap: 20px;
+        --border-radius: 20px;
+        --button-height: 56px;
+        --icon-size: 28px;
+      }
+      
+      .content {
+        padding: 32px 24px 40px;
+        gap: 32px;
+      }
+      
+      .topbar {
+        padding: 20px 24px;
+      }
+      
+      .btn-icon {
+        width: 44px;
+        height: 44px;
+      }
+      
+      .hello .mark {
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .input {
+        padding: 18px;
+      }
+      
+      .car-illu {
+        width: 240px;
+        height: 170px;
+      }
+      
+      .tile {
+        padding: 20px;
+      }
+      
+      .cta {
+        padding: 28px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      :root {
+        --container-padding: 32px;
+        --section-gap: 40px;
+        --card-gap: 24px;
+        --border-radius: 24px;
+        --button-height: 64px;
+        --icon-size: 32px;
+      }
+      
+      .content {
+        padding: 40px 32px 48px;
+        gap: 40px;
+      }
+      
+      .topbar {
+        padding: 24px 32px;
+      }
+      
+      .btn-icon {
+        width: 48px;
+        height: 48px;
+      }
+      
+      .hello .mark {
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+      }
+      
+      h1 {
+        font-size: 26px;
+      }
+      
+      .input {
+        padding: 20px;
+      }
+      
+      .car-illu {
+        width: 280px;
+        height: 200px;
+      }
+      
+      .tile {
+        padding: 24px;
+      }
+      
+      .cta {
+        padding: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <!-- 상단바 -->
+    <header class="topbar">
+      <button class="btn-icon" aria-label="메뉴">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+
+      <div class="logo">
+        <span class="logo-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b73ff" stroke-width="2">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M8 13l2 2 4-4"></path>
+          </svg>
+        </span>
+        <span>아이-고</span>
+      </div>
+
+      <a class="link-login" href="#">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M20 21a8 8 0 0 0-16 0"></path>
+        </svg>
+        <span>로그인</span>
+      </a>
+    </header>
+
+    <div class="content">
+      <span class="ribbon">스마트 운전 교육 플랫폼</span>
+
+      <div class="hello">
+        <div class="mark">?</div>
+        <div>
+          <div style="color:#2b73ff;font-weight:900;margin-bottom:6px">아이-고</div>
+          <h1>서비스 이용을 위해<br><u>로그인</u> 해주세요.</h1>
+        </div>
+      </div>
+
+      <!-- 폼 -->
+      <form class="form" action="#" method="post">
+        <label class="input" aria-label="이메일">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+            <path d="M4 4h16v16H4z"></path>
+            <path d="M4 8l8 5 8-5"></path>
+          </svg>
+          <input type="email" placeholder="이메일을 입력하세요." required>
+        </label>
+
+        <label class="input" aria-label="비밀번호">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <input type="password" placeholder="비밀번호를 입력하세요." required>
+          <button type="button" aria-label="비밀번호 보기" style="border:none;background:transparent;padding:0;margin-left:6px;color:#6b7280;cursor:pointer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </label>
+
+        <div class="field-foot">
+          <label class="remember">
+            <input type="checkbox" />
+            <span>로그인 상태 유지</span>
+          </label>
+          <a class="link" href="#">비밀번호 찾기</a>
+        </div>
+
+        <button class="btn-primary" type="submit">로그인</button>
+        <div class="signup">아직 회원이 아니신가요? <a href="#">회원가입</a></div>
+      </form>
+
+      <!-- 일러스트 -->
+      <div class="illu-wrap">
+        <div class="car-illu">
+          <!-- 단순한 자동차/사람 일러스트 느낌 -->
+          <svg width="160" height="110" viewBox="0 0 200 140" fill="none">
+            <rect x="20" y="60" width="160" height="40" rx="12" fill="#85b6ff" stroke="#1e66ff" stroke-width="2"/>
+            <circle cx="60" cy="110" r="14" fill="#1f2a44"/>
+            <circle cx="140" cy="110" r="14" fill="#1f2a44"/>
+            <rect x="38" y="45" width="124" height="24" rx="6" fill="#d8ecff" stroke="#1e66ff" stroke-width="2"/>
+            <circle cx="95" cy="78" r="8" fill="#1e66ff"/>
+            <!-- 캐릭터 -->
+            <circle cx="84" cy="58" r="10" fill="#ffd7b6"/>
+            <circle cx="116" cy="58" r="10" fill="#ffd7b6"/>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="title2">왜 <span style="color:#2b73ff;font-weight:900">아이-고</span>를 선택해야 할까요?</h2>
+      <p class="desc">실제 도로 영상과 AI 기술을 결합한 운전 교육 서비스로<br/>효과적인 학습이 가능합니다.</p>
+
+      <div class="list">
+        <div class="tile">
+          <div class="lead blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div>
+            <div class="t">실제 도로 주행 영상</div>
+            <div class="s">실제 도로 상황을 담은 영상으로 현실적인 학습 경험을 제공합니다.</div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="lead green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div>
+            <div class="t">AI 맞춤 문제</div>
+            <div class="s">AI가 생성한 맞춤형 문제로 효과적인 학습이 가능합니다.</div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="lead purple">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 13h2v5H7zM11 9h2v9h-2zM15 6h2v12h-2z"/></svg>
+          </div>
+          <div>
+            <div class="t">학습 분석</div>
+            <div class="s">상세한 학습 분석으로 약점을 파악하고 개선할 수 있습니다.</div>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="lead orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 9v4"></path><path d="M12 17h.01"></path>
+              <path d="M4.5 20h15l.5-10A7.5 7.5 0 0 0 12 2.5 7.5 7.5 0 0 0 4 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="t">안전 운전</div>
+            <div class="s">교통 법규와 안전 운전 습관을 체계적으로 학습할 수 있습니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta">
+        <h3>지금 바로 시작하세요</h3>
+        <p>AI-Go와 함께 더 안전하고 자신감 있는 운전자가 되어보세요.<br/>언제 어디서나 학습을 시작할 수 있습니다.</p>
+        <a class="cta-btn" href="#">
+          무료로 시작하기
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

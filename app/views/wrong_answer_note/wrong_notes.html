@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>아이-고 · 오답노트</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f8fb; --card:#fff; --line:#e6e8ee; --text:#0f172a; --muted:#66748c;
+    --blue:#2563ff; --blue-700:#1f54f0; --blue-050:#eef4ff;
+    --green:#10b981; --green-50:#ecfdf5; --green-200:#b9ecd9;
+    --amber:#f59e0b; --amber-50:#fff7e6;
+    --rose:#ef4444; --rose-50:#fff2f2; --rose-200:#ffc9cf;
+    --shadow:0 8px 28px rgba(15,23,42,.06);
+    --radius:18px; --focus:0 0 0 3px rgba(37,99,255,.18);
+    
+    /* 모바일 웹 표준 여백 시스템 */
+    --container-padding: 16px;
+    --section-gap: 24px;
+    --card-gap: 16px;
+    --border-radius: 16px;
+    --button-height: 48px;
+    --icon-size: 24px;
+  }
+  
+  *{box-sizing:border-box}
+  
+  html,body{
+    height:100%;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body{
+    background:var(--bg); 
+    color:var(--text);
+    font-family:"Pretendard","Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
+  
+  .app{
+    width: 100%;
+    min-height: 100vh; 
+    display:flex; 
+    flex-direction:column;
+  }
+
+  /* ===== Topbar ===== */
+  .topbar{
+    position:sticky; 
+    top:0; 
+    z-index:5; 
+    background:#fff; 
+    border-bottom:1px solid var(--line);
+    padding: 16px var(--container-padding); 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .row{
+    display:flex; 
+    align-items:center; 
+    gap:10px
+  }
+  
+  .btn-ic{
+    width: 40px;
+    height: 40px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#fff;
+    display:grid;
+    place-items:center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  
+  .btn-ic:hover {
+    background: var(--bg);
+    border-color: var(--blue);
+    transform: translateY(-1px);
+  }
+  
+  .title{
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    font-weight:900;
+    font-size: 18px;
+  }
+  
+  .title .book{
+    width: 28px;
+    height: 28px;
+    border-radius:9px;
+    border:1px solid #d8e4ff;
+    background:#eef4ff;
+    display:grid;
+    place-items:center;
+    color:#e23a3a;
+    flex-shrink: 0;
+  }
+  
+  .chip-user{
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    border:1px solid var(--line); 
+    padding:8px 12px; 
+    border-radius:999px; 
+    background:#fff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .chip-user:hover {
+    background: var(--bg);
+    transform: translateY(-1px);
+  }
+  
+  .chip-user .dot{
+    width: 22px;
+    height: 22px;
+    border-radius:999px;
+    background:#1e6bff;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:12px;
+    font-weight:800;
+    flex-shrink: 0;
+  }
+
+  .page{
+    padding: var(--section-gap) var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
+  }
+
+  /* ===== Header panel ===== */
+  .panel{
+    background:var(--card); 
+    border:1px solid var(--line); 
+    border-radius:22px; 
+    box-shadow:var(--shadow); 
+    padding: 24px;
+  }
+  
+  .panel-head{
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between
+  }
+  
+  .panel .left{
+    display:flex; 
+    align-items:center; 
+    gap:10px
+  }
+  
+  .round{
+    width: 30px;
+    height: 30px;
+    border-radius:999px;
+    display:grid;
+    place-items:center;
+    border:1px solid #ffd3d6;
+    background:#fff5f6;
+    color:#e23a3a;
+    font-weight:900;
+    flex-shrink: 0;
+  }
+  
+  .total{
+    color:#8b97ad;
+    font-size: 14px;
+  }
+  
+  .total b{
+    color:#e23a3a
+  }
+
+  .search{
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    margin-top:16px
+  }
+  
+  .search .inp{
+    flex:1; 
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    border:1px solid var(--line); 
+    border-radius:14px; 
+    padding:12px 16px; 
+    background:#fff;
+    transition: all 0.2s ease;
+  }
+  
+  .search .inp:focus-within {
+    border-color: var(--blue);
+    box-shadow: var(--focus);
+    transform: translateY(-1px);
+  }
+  
+  .search input{
+    border:none; 
+    outline:none; 
+    width:100%; 
+    font-size:14px
+  }
+  
+  .filter{
+    margin-top:12px; 
+    display:flex;
+    gap: 8px;
+  }
+  
+  .filter button{
+    flex:1; 
+    border:1px solid var(--line); 
+    background:#fff; 
+    border-radius:12px; 
+    padding:12px; 
+    font-weight:800; 
+    color:#52607a;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .filter button:hover {
+    background: var(--bg);
+    border-color: var(--blue);
+    transform: translateY(-1px);
+  }
+
+  /* ===== List ===== */
+  .list{
+    display:flex; 
+    flex-direction:column; 
+    gap:12px; 
+    margin-top:16px
+  }
+  
+  .item{
+    background:#fff; 
+    border:1px solid var(--line); 
+    border-radius:16px; 
+    padding:16px; 
+    box-shadow:var(--shadow); 
+    cursor:pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(15,23,42,0.1);
+  }
+  
+  .item-top{
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    color:#8693aa; 
+    font-size:12px
+  }
+  
+  .badge{
+    display:inline-flex; 
+    align-items:center; 
+    gap:6px; 
+    padding:4px 8px; 
+    border-radius:999px; 
+    background:#ffecec; 
+    color:#d84c55; 
+    font-weight:900
+  }
+  
+  .item-ask{
+    margin:8px 0 10px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .chip{
+    display:inline-flex; 
+    padding:4px 8px; 
+    border-radius:999px; 
+    background:#f1f4fb; 
+    color:#66748c; 
+    font-weight:800; 
+    font-size:12px
+  }
+  
+  .wrong-flag{
+    display:inline-flex; 
+    align-items:center; 
+    gap:6px; 
+    color:#e23a3a; 
+    font-weight:800
+  }
+
+  /* ===== Detail ===== */
+  .video{
+    height:170px; 
+    background:#111; 
+    border:1px solid #1f2835; 
+    border-radius:16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .sec{
+    margin-top:16px
+  }
+  
+  .qbox{
+    border:1px solid var(--line); 
+    background:#fff; 
+    border-radius:16px; 
+    padding:20px
+  }
+  
+  .qbox .qtitle{
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    font-weight:900; 
+    margin-bottom:12px;
+    font-size: 16px;
+  }
+  
+  .opt{
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    padding:16px; 
+    border:1px solid var(--line); 
+    border-radius:14px; 
+    background:#fff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+  
+  .opt:hover {
+    border-color: var(--blue);
+    background: var(--blue-050);
+    transform: translateY(-1px);
+  }
+  
+  .num{
+    width: 28px;
+    height: 28px;
+    border-radius:999px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--line); 
+    background:#f5f7fb; 
+    color:#738099; 
+    font-weight:800;
+    flex-shrink: 0;
+  }
+
+  .opt.correct{
+    border-color:#7bdab8; 
+    background:var(--green-50)
+  }
+  
+  .opt.correct .num{
+    border-color:#9fe6cf; 
+    background:#e7fff6; 
+    color:#0b9b6b
+  }
+  
+  .opt.wrong{
+    border-color:#ffb7bf; 
+    background:var(--rose-50)
+  }
+  
+  .opt.wrong .num{
+    border-color:#ffc4cc; 
+    background:#fff0f2; 
+    color:#d9484c
+  }
+
+  .actions{
+    display:flex; 
+    gap:12px; 
+    margin-top:16px
+  }
+  
+  .half{
+    flex:1
+  }
+  
+  .btn-primary{
+    width:100%; 
+    border:none; 
+    border-radius:14px; 
+    padding:16px; 
+    background:linear-gradient(90deg,var(--blue),var(--blue-700)); 
+    color:#fff; 
+    font-weight:900; 
+    box-shadow:0 10px 24px rgba(37,99,255,.25);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    height: var(--button-height);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(37,99,255,.35);
+  }
+  
+  .btn-ghost{
+    width:100%; 
+    border:1px solid #c7cedd; 
+    border-radius:14px; 
+    padding:16px; 
+    background:#f1f3f6; 
+    color:#3c4253; 
+    font-weight:900;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    height: var(--button-height);
+  }
+  
+  .btn-ghost:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+  }
+
+  .explain{
+    border-radius:16px; 
+    padding:16px; 
+    margin-top:16px;
+    line-height: 1.5;
+  }
+  
+  .explain.bad{
+    border:1px solid var(--rose-200); 
+    background:#fff7f8; 
+    color:#a13136
+  }
+  
+  .explain.good{
+    border:1px solid var(--green-200); 
+    background:#f0fdf7; 
+    color:#0e7d5a
+  }
+  
+  .law{
+    margin-top:12px; 
+    border:1px solid #dbe6ff; 
+    background:#f5f8ff; 
+    border-radius:12px; 
+    padding:12px
+  }
+  
+  .law a{
+    color:#2b67ff; 
+    text-decoration:none; 
+    font-weight:900;
+    transition: color 0.2s ease;
+  }
+  
+  .law a:hover {
+    color: var(--blue-700);
+  }
+
+  /* 추천 유사 문제 */
+  .rec{
+    margin-top:16px
+  }
+  
+  .rec h3{
+    margin:8px 0 12px; 
+    font-size:16px;
+    font-weight: 800;
+  }
+  
+  .pill{
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    gap:10px; 
+    padding:16px; 
+    border-radius:14px; 
+    border:1px solid var(--line); 
+    background:#fff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+  
+  .pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15,23,42,0.1);
+  }
+  
+  .pill .name{
+    font-weight:900;
+    font-size: 14px;
+  }
+  
+  .pill .desc{
+    font-size:12px; 
+    color:#6b7a93; 
+    margin-top:4px;
+    line-height: 1.4;
+  }
+  
+  .pill .chev{
+    width: 28px;
+    height: 28px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    display:grid;
+    place-items:center;
+    background:#fff;
+    flex-shrink: 0;
+  }
+  
+  .pill.green{
+    background:var(--green-50); 
+    border-color:#d7f5ea
+  }
+  
+  .pill.amber{
+    background:var(--amber-50); 
+    border-color:#ffedc2
+  }
+  
+  .pill.rose{
+    background:var(--rose-50); 
+    border-color:#ffcfd6
+  }
+
+  .backbar{
+    position:sticky; 
+    bottom:0; 
+    background:var(--bg); 
+    padding:16px 0 4px;
+    margin-top: auto;
+  }
+  
+  .backbar .btn-ghost{
+    background:#fff;
+    width: 100%;
+  }
+
+  a:focus, button:focus, .pill:focus, .opt:focus{
+    outline:var(--focus)
+  }
+
+  /* ===== 반응형 디자인 ===== */
+  @media (max-width: 480px) {
+    :root {
+      --container-padding: 16px;
+      --section-gap: 20px;
+      --card-gap: 12px;
+      --border-radius: 16px;
+      --button-height: 48px;
+      --icon-size: 24px;
+    }
+    
+    .page {
+      padding: 20px 16px;
+      gap: 20px;
+    }
+    
+    .topbar {
+      padding: 16px 16px;
+    }
+    
+    .btn-ic {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .panel {
+      padding: 20px;
+    }
+    
+    .search .inp {
+      padding: 10px 14px;
+    }
+    
+    .filter button {
+      padding: 10px;
+    }
+    
+    .item {
+      padding: 14px;
+    }
+    
+    .qbox {
+      padding: 16px;
+    }
+    
+    .opt {
+      padding: 14px;
+    }
+    
+    .btn-primary, .btn-ghost {
+      padding: 14px;
+    }
+    
+    .pill {
+      padding: 14px;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    :root {
+      --container-padding: 24px;
+      --section-gap: 32px;
+      --card-gap: 20px;
+      --border-radius: 20px;
+      --button-height: 56px;
+      --icon-size: 28px;
+    }
+    
+    .page {
+      padding: 32px 24px;
+      gap: 32px;
+    }
+    
+    .topbar {
+      padding: 20px 24px;
+    }
+    
+    .btn-ic {
+      width: 44px;
+      height: 44px;
+    }
+    
+    .panel {
+      padding: 28px;
+    }
+    
+    .search .inp {
+      padding: 14px 18px;
+    }
+    
+    .filter button {
+      padding: 14px;
+    }
+    
+    .item {
+      padding: 18px;
+    }
+    
+    .qbox {
+      padding: 24px;
+    }
+    
+    .opt {
+      padding: 18px;
+    }
+    
+    .btn-primary, .btn-ghost {
+      padding: 18px;
+    }
+    
+    .pill {
+      padding: 18px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    :root {
+      --container-padding: 32px;
+      --section-gap: 40px;
+      --card-gap: 24px;
+      --border-radius: 24px;
+      --button-height: 64px;
+      --icon-size: 32px;
+    }
+    
+    .page {
+      padding: 40px 32px;
+      gap: 40px;
+    }
+    
+    .topbar {
+      padding: 24px 32px;
+    }
+    
+    .btn-ic {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .panel {
+      padding: 32px;
+    }
+    
+    .search .inp {
+      padding: 16px 20px;
+    }
+    
+    .filter button {
+      padding: 16px;
+    }
+    
+    .item {
+      padding: 20px;
+    }
+    
+    .qbox {
+      padding: 28px;
+    }
+    
+    .opt {
+      padding: 20px;
+    }
+    
+    .btn-primary, .btn-ghost {
+      padding: 20px;
+    }
+    
+    .pill {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- topbar -->
+  <header class="topbar">
+    <div class="row">
+      <button class="btn-ic" id="openDrawer" aria-label="메뉴">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="title">
+        <span class="book">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e23a3a" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 7h8M8 11h8"/></svg>
+        </span>
+        오답노트
+      </div>
+    </div>
+    <div class="chip-user" style="cursor: pointer;" onclick="location.hash='#/mypage'">
+      <span class="dot">김</span> 김운전
+    </div>
+  </header>
+
+  <!-- ===== View: List ===== -->
+  <section id="view-list" class="page">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="left">
+          <span class="round">✖</span>
+          <div>
+            <div style="font-weight:900">오답노트</div>
+            <div style="color:#8b97ad">틀린 문제를 다시 학습하세요</div>
+          </div>
+        </div>
+        <div class="total">총 오답 수 <b id="totalWrong">0</b></div>
+      </div>
+
+      <div class="search">
+        <div class="inp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7b879b" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3-3"></path></svg>
+          <input id="search" placeholder="문제 검색..." />
+        </div>
+      </div>
+
+      <div class="filter">
+        <button id="filterAll">전체</button>
+      </div>
+    </div>
+
+    <div id="listWrap" class="list"></div>
+  </section>
+
+  <!-- ===== View: Detail ===== -->
+  <section id="view-detail" class="page" hidden>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="left">
+          <span class="round">✖</span>
+          <div>
+            <div style="font-weight:900">오답노트</div>
+            <div style="color:#8b97ad">틀린 문제를 다시 학습하세요</div>
+          </div>
+        </div>
+        <div class="total">총 오답 수 <b id="totalWrong2">0</b></div>
+      </div>
+
+      <div class="sec video">
+        <div>비디오 영상이 여기에 표시됩니다</div>
+      </div>
+
+      <div class="sec qbox">
+        <div class="qtitle">
+          <div>문제 <span id="dNo"></span> <span id="dWrongBadge" class="badge" style="margin-left:6px">오답</span></div>
+        </div>
+        <div id="dAsk" style="margin-bottom:10px"></div>
+        <div id="dOpts"></div>
+      </div>
+
+      <div id="explainWrap"></div>
+
+      <div class="actions">
+        <button id="retryBtn" class="btn-primary half">↻ 다시 풀기</button>
+        <button id="saveBtn" class="btn-ghost half">□ 저장 문제</button>
+      </div>
+
+      <div class="rec">
+        <h3>AI 추천 유사 문제</h3>
+        <button class="pill green">
+          <div><div class="name">쉬움</div><div class="desc">스쿨존에서 어린이가 뛰어나올 때 대처 방법은?</div></div>
+          <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="pill amber">
+          <div><div class="name">보통</div><div class="desc">고속도로에서 차선을 변경할 때 주의 사항은?</div></div>
+          <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="pill rose">
+          <div><div class="name">어려움</div><div class="desc">빗길에서 미끄러질 수 있는 상황에서 브레이크 조작법?</div></div>
+          <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+        </button>
+      </div>
+
+      <div class="backbar">
+        <button id="backToList" class="btn-ghost">목록으로 돌아가기</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const qs = (s,sc=document)=>sc.querySelector(s);
+  const qsa = (s,sc=document)=>Array.from(sc.querySelectorAll(s));
+
+  // ===== Mock data =====
+  const wrongs = [
+    {
+      id: 15, date: '2024-01-10', tag: '신호 위반',
+      ask: '교차로에서 신호위반으로 갑시다. 신호를 위반했을 때 벌점은?',
+      options: ['앞차를 추월하여 빠르게 교차로를 통과한다', '안전거리를 유지하여 정차한 앞차에 정차한다', '좌측으로 우회 앞차에게 신호를 보낸다', '클락션으로 앞차 속도 통과한다'],
+      answer: 1,
+      desc: '교차로에 신호등이 있습니다. 신호등의 불빛은 빨간불로 바뀌었고, 앞차가 급정거했습니다.'
+    },
+    {
+      id: 23, date: '2024-01-08', tag: '차선 변경',
+      ask: '편도 2차로 도로에서 주행 중입니다. 앞 차량이 우회전 신호를 켜고 있을 때 행동은?',
+      options: ['즉시 추월한다', '속도를 줄이고 앞 차량의 진로를 배려한다', '클락션을 울리며 진행한다', '차선을 바꾸어 가속한다'],
+      answer: 1,
+      desc: '좌측 차로는 원활하나 우측에서 차량이 감속하며 우회전을 준비합니다.'
+    },
+    {
+      id: 8, date: '2024-01-15', tag: '추월',
+      ask: '중앙선이 있는 도로에서 주행 중입니다. 앞차가 아예 도로를 막아서고 있습니다.',
+      options: ['중앙선을 넘어 추월한다', '안전거리를 유지하고 정차한다', '경음기를 울리며 추월 시도', '상향등을 켠다'],
+      answer: 1,
+      desc: '중앙선이 있어 추월이 금지된 상황입니다. 앞차는 정체로 멈춰 있습니다.'
+    }
+  ];
+
+  // ===== State =====
+  let current = null; // current wrong item
+  let picked = null;
+  const saved = new Set(JSON.parse(localStorage.getItem('ai_go_saved_wrong')||'[]'));
+
+  // ===== Views =====
+  const vList = qs('#view-list');
+  const vDetail = qs('#view-detail');
+
+  function show(view){
+    vList.hidden = view!=='list';
+    vDetail.hidden = view!=='detail';
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+
+  // ===== List render =====
+  function renderList(items){
+    qs('#totalWrong').textContent = wrongs.length;
+    qs('#listWrap').innerHTML = '';
+    items.forEach(row=>{
+      const el = document.createElement('article');
+      el.className='item';
+      el.innerHTML = `
+        <div class="item-top">
+          <div style="display:flex;align-items:center;gap:6px">
+            <span class="badge">문제 ${row.id}</span>
+            <span>${row.date}</span>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fa0b5" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+        <div class="item-ask">${row.ask}</div>
+        <div style="display:flex;align-items:center; justify-content:space-between">
+          <span class="chip">${row.tag}</span>
+          <span class="wrong-flag">✖ 오답</span>
+        </div>
+      `;
+      el.addEventListener('click', ()=> openDetail(row));
+      qs('#listWrap').appendChild(el);
+    });
+  }
+
+  // ===== Detail render =====
+  function openDetail(row){
+    current = row;
+    picked = null;
+    qs('#totalWrong2').textContent = wrongs.length;
+    qs('#dNo').textContent = row.id;
+    qs('#dAsk').textContent = row.ask;
+    qs('#explainWrap').innerHTML = '';
+    renderOptions(row);
+    updateSaveButton();
+    show('detail');
+  }
+
+  function renderOptions(row){
+    const box = qs('#dOpts');
+    box.innerHTML = '';
+    row.options.forEach((t,i)=>{
+      const b = document.createElement('button');
+      b.type='button';
+      b.className='opt';
+      b.innerHTML = `<span class="num">${i+1}</span><span>${t}</span>`;
+      b.addEventListener('click', ()=>{
+        picked = i;
+        // 채점
+        qsa('.opt', box).forEach(el=>{el.classList.remove('correct','wrong')});
+        if (picked === row.answer){
+          b.classList.add('correct');
+          showExplain(true, row);
+        }else{
+          b.classList.add('wrong');
+          // 정답 표시
+          const corr = box.children[row.answer];
+          if (corr) corr.classList.add('correct');
+          showExplain(false, row);
+        }
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function showExplain(ok, row){
+    const w = qs('#explainWrap');
+    const cls = ok ? 'good' : 'bad';
+    const title = ok ? '✅ 정답입니다!' : '❌ 오답입니다!';
+    w.innerHTML = `
+      <div class="explain ${cls}">
+        <div style="font-weight:900;margin-bottom:6px">${title}</div>
+        <div style="line-height:1.6">${detailText(row)}</div>
+        <div class="law">
+          <div style="font-weight:800; margin-bottom:4px">관련 법규</div>
+          <a href="#" aria-label="도로교통법 제19조 (차로의 변경)">도로교통법 제19조 (차로의 변경)</a>
+        </div>
+      </div>
+    `;
+  }
+  function detailText(row){
+    if (row.tag==='차선 변경') {
+      return '차선 변경 시에는 먼저 룸미러를 통해 뒤차와의 거리를 확인하고, 방향지시등을 켠 후, 사각지대 확인을 다음 안전하게 차선을 변경해야 합니다.';
+    }
+    if (row.tag==='신호 위반') {
+      return '신호 위반 상황에서는 속도를 줄이고 안전거리를 유지한 채 정차해야 하며, 신호가 바뀐 후 교차로를 통과해야 합니다.';
+    }
+    return row.desc;
+  }
+
+  // 저장 문제
+  const saveBtn = qs('#saveBtn');
+  function updateSaveButton(){
+    if (!current) return;
+    const isSaved = saved.has(current.id);
+    saveBtn.textContent = (isSaved ? '■ 저장 해제' : '□ 저장 문제');
+  }
+  saveBtn.addEventListener('click', ()=>{
+    if (!current) return;
+    if (saved.has(current.id)) saved.delete(current.id);
+    else saved.add(current.id);
+    localStorage.setItem('ai_go_saved_wrong', JSON.stringify(Array.from(saved)));
+    updateSaveButton();
+  });
+
+  // 다시 풀기
+  qs('#retryBtn').addEventListener('click', ()=>{
+    if (!current) return;
+    qs('#explainWrap').innerHTML = '';
+    renderOptions(current);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  // 뒤로
+  qs('#backToList').addEventListener('click', ()=> show('list'));
+
+  // 검색
+  const search = qs('#search');
+  search.addEventListener('input', ()=>{
+    const q = search.value.trim();
+    const filtered = q ? wrongs.filter(r => r.ask.includes(q) || r.tag.includes(q)) : wrongs;
+    renderList(filtered);
+  });
+
+  // 초기 렌더
+  renderList(wrongs);
+  show('list');
+})();
+</script>
+</body>
+</html>

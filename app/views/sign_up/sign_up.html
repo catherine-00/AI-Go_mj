@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>아이-고 · 회원가입</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --line:#e6e8ee; --text:#0f172a; --muted:#6b7a93;
+    --blue:#246bff; --blue-700:#1e5af2; --blue-050:#eef4ff;
+    --shadow:0 8px 28px rgba(15,23,42,.06);
+    --radius:16px;
+    --focus:0 0 0 3px rgba(36,107,255,.18);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:
+      radial-gradient(120px 120px at 80% 90%, #ebf2ff 0%, transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:"Pretendard","Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    display:flex; justify-content:center;
+  }
+  .page{width:360px; min-height:100dvh; background:transparent; display:flex; flex-direction:column}
+
+  /* ===== Topbar ===== */
+  .topbar{
+    position:sticky; top:0; z-index:5; background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:12px 12px; display:flex; align-items:center; gap:10px;
+  }
+  .btn{display:grid;place-items:center; width:36px;height:36px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .brand{display:flex; align-items:center; gap:8px; color:#246bff; font-weight:900; font-size:18px}
+  .brand .badge{width:28px;height:28px;border-radius:9px;border:1px solid #d5e2ff;background:#eef4ff;display:grid;place-items:center}
+
+  /* ===== Panel ===== */
+  .wrap{padding:14px}
+  .panel{
+    background:var(--card); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow);
+    padding:16px;
+  }
+  h1{margin:6px 0 6px; font-size:22px; font-weight:900}
+  .sub{color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:12px}
+
+  /* ===== Fieldset / labels ===== */
+  .field + .field{margin-top:14px}
+  .label{
+    display:flex; align-items:center; gap:8px; font-weight:800; margin:6px 2px 6px; color:#22324d;
+  }
+  .label .ic{width:18px;height:18px;color:#7b879b}
+  .input{
+    display:flex; align-items:center; gap:10px;
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 12px;
+  }
+  .input input{
+    border:none; outline:none; width:100%; font-size:14px; color:var(--text); background:transparent;
+  }
+  .input:focus-within{box-shadow:var(--focus); border-color:#cfe0ff}
+  .hint{font-size:12px; color:#8a97aa; margin-top:6px}
+
+  .split{display:flex; gap:10px; align-items:center}
+  .split .cell{flex:1}
+  .split .cell.small{flex:0 0 68px}
+  .split .cell.mid{flex:0 0 86px}
+  .split .sep{color:#bec6d6}
+
+  .with-right{position:relative}
+  .with-right .eye{
+    position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;
+  }
+
+  /* ===== Button ===== */
+  .btn-primary{
+    width:100%; margin-top:16px;
+    border:none; border-radius:14px; padding:14px 16px;
+    background:linear-gradient(90deg,var(--blue),var(--blue-700));
+    color:#fff; font-weight:900; font-size:16px; cursor:pointer;
+    box-shadow:0 10px 24px rgba(36,107,255,.25);
+  }
+  .btn-primary:active{transform:translateY(1px)}
+
+  .terms{margin-top:12px; text-align:center; color:#8d97a9; font-size:12px}
+  .terms a{color:#3a63ff; text-decoration:none; font-weight:800}
+
+  /* ===== Dialog (팝업) ===== */
+  .overlay{position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; place-items:center; z-index:30}
+  .overlay.show{display:grid}
+  .dialog{
+    width:320px; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
+    padding:16px; text-align:center;
+  }
+  .dialog .msg{color:#5a6a85; font-weight:700; margin:10px 0 14px}
+  .dialog .ok{
+    display:block; width:100%; border:none; border-radius:12px; padding:12px 16px;
+    background:linear-gradient(90deg,var(--blue),var(--blue-700)); color:#fff; font-weight:900; cursor:pointer
+  }
+
+  /* a11y focus */
+  a:focus, button:focus, input:focus{outline:var(--focus)}
+</style>
+</head>
+<body>
+  <div class="page">
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="btn" aria-label="뒤로 가기" onclick="history.back()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="brand" aria-label="아이-고">
+        <span class="badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b73ff" stroke-width="2">
+            <rect x="3" y="8" width="18" height="8" rx="2"></rect>
+            <circle cx="8" cy="17" r="2" fill="#2b73ff" stroke="none"></circle>
+            <circle cx="16" cy="17" r="2" fill="#2b73ff" stroke="none"></circle>
+          </svg>
+        </span>
+        <strong>아이-고</strong>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <section class="panel" aria-label="회원가입 양식">
+        <h1>계정 만들기</h1>
+        <p class="sub">AI-Go 회원이 되어 더 많은 기능을 이용하세요</p>
+
+        <form id="signupForm" novalidate>
+          <!-- 이름 -->
+          <div class="field">
+            <div class="label">
+              <span class="ic">👤</span> 이름
+            </div>
+            <label class="input">
+              <input id="name" type="text" placeholder="이름을 입력하세요." autocomplete="name" required>
+            </label>
+          </div>
+
+          <!-- 전화번호 -->
+          <div class="field">
+            <div class="label">
+              <span class="ic">📞</span> 전화번호
+            </div>
+            <div class="split">
+              <div class="cell small">
+                <label class="input"><input id="ph1" inputmode="numeric" maxlength="3" placeholder="010"></label>
+              </div>
+              <span class="sep">-</span>
+              <div class="cell mid">
+                <label class="input"><input id="ph2" inputmode="numeric" maxlength="4" placeholder="0000"></label>
+              </div>
+              <span class="sep">-</span>
+              <div class="cell mid">
+                <label class="input"><input id="ph3" inputmode="numeric" maxlength="4" placeholder="0000"></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 이메일 -->
+          <div class="field">
+            <div class="label">
+              <span class="ic">✉️</span> 이메일
+            </div>
+            <div class="split">
+              <div class="cell">
+                <label class="input"><input id="emailId" type="text" placeholder="admin" autocomplete="email"></label>
+              </div>
+              <span class="sep">@</span>
+              <div class="cell">
+                <label class="input"><input id="emailDomain" type="text" placeholder="email.com"></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 생년월일 -->
+          <div class="field">
+            <div class="label">
+              <span class="ic">📅</span> 생년월일
+            </div>
+            <div class="split">
+              <div class="cell mid">
+                <label class="input"><input id="yy" inputmode="numeric" maxlength="4" placeholder="0000"></label>
+              </div>
+              <span class="sep">년</span>
+              <div class="cell small">
+                <label class="input"><input id="mm" inputmode="numeric" maxlength="2" placeholder="00"></label>
+              </div>
+              <span class="sep">월</span>
+              <div class="cell small">
+                <label class="input"><input id="dd" inputmode="numeric" maxlength="2" placeholder="00"></label>
+              </div>
+              <span class="sep">일</span>
+            </div>
+          </div>
+
+          <!-- 비밀번호 -->
+          <div class="field">
+            <div class="label">
+              <span class="ic">🔒</span> 비밀번호 <span class="hint">(8자 이상)</span>
+            </div>
+            <div class="with-right">
+              <label class="input">
+                <input id="pw" type="password" placeholder="비밀번호를 입력하세요." minlength="8" required>
+              </label>
+              <button class="eye" type="button" aria-label="비밀번호 보기" data-toggle="#pw">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 비밀번호 확인 -->
+          <div class="field">
+            <div class="label">
+              <span class="ic">🔒</span> 비밀번호 확인
+            </div>
+            <div class="with-right">
+              <label class="input">
+                <input id="pw2" type="password" placeholder="비밀번호를 다시 입력하세요." minlength="8" required>
+              </label>
+              <button class="eye" type="button" aria-label="비밀번호 보기" data-toggle="#pw2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">회원가입</button>
+          <div class="terms">
+            회원가입을 진행하면 <a href="#">이용약관</a> 및 <a href="#">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <!-- 팝업 -->
+  <div id="modal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="dialogMsg">
+    <div class="dialog">
+      <div id="dialogMsg" class="msg">모든 정보를 입력해주세요</div>
+      <button id="dialogOk" class="ok" type="button">확인</button>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const $ = (s, sc=document) => sc.querySelector(s);
+  const $$ = (s, sc=document) => Array.from(sc.querySelectorAll(s));
+
+  // 숫자만 입력 + 자동 이동
+  function onlyDigits(e){
+    e.target.value = e.target.value.replace(/\D+/g,'');
+  }
+  function autoMove(e){
+    const t = e.target;
+    const max = t.getAttribute('maxlength');
+    if (max && t.value.length >= +max) {
+      const next = t.closest('.split')?.querySelectorAll('input');
+      if (!next) return;
+      const arr = Array.from(next);
+      const idx = arr.indexOf(t);
+      if (idx > -1 && arr[idx+1]) arr[idx+1].focus();
+    }
+  }
+  $$('#ph1,#ph2,#ph3,#yy,#mm,#dd').forEach(i=>{
+    i.addEventListener('input', onlyDigits);
+    i.addEventListener('input', autoMove);
+  });
+
+  // 비밀번호 보기 토글
+  $$('.eye').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = $(btn.dataset.toggle);
+      if (!target) return;
+      target.type = target.type === 'password' ? 'text' : 'password';
+      target.focus();
+    });
+  });
+
+  // 모달
+  const modal = $('#modal');
+  const dialogMsg = $('#dialogMsg');
+  const dialogOk = $('#dialogOk');
+  function openModal(msg){
+    dialogMsg.textContent = msg;
+    modal.classList.add('show');
+    dialogOk.focus();
+  }
+  function closeModal(){ modal.classList.remove('show'); }
+  dialogOk.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeModal(); });
+
+  // 폼 검증
+  $('#signupForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+
+    const name = $('#name').value.trim();
+    const ph1 = $('#ph1').value.trim(), ph2=$('#ph2').value.trim(), ph3=$('#ph3').value.trim();
+    const emailId = $('#emailId').value.trim(), emailDomain=$('#emailDomain').value.trim();
+    const yy = $('#yy').value.trim(), mm=$('#mm').value.trim(), dd=$('#dd').value.trim();
+    const pw = $('#pw').value, pw2 = $('#pw2').value;
+
+    // 필수 입력
+    if (!name || !ph1 || !ph2 || !ph3 || !emailId || !emailDomain || !yy || !mm || !dd || !pw || !pw2){
+      openModal('모든 정보를 입력해주세요');
+      return;
+    }
+
+    // 이메일 형식
+    const email = `${emailId}@${emailDomain}`;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailOk){
+      openModal('이메일/비밀번호를 다시 확인해주세요.');
+      return;
+    }
+
+    // 전화번호 길이
+    if (ph1.length!==3 || ph2.length!==4 || ph3.length!==4){
+      openModal('전화번호를 다시 확인해주세요.');
+      return;
+    }
+
+    // 생년월일 유효성(간단)
+    const y = +yy, m=+mm, d=+dd;
+    const dateOk = y>=1900 && y<=2100 && m>=1 && m<=12 && d>=1 && d<=31;
+    if(!dateOk){
+      openModal('생년월일을 다시 확인해주세요.');
+      return;
+    }
+
+    // 비밀번호 규칙
+    if (pw.length<8){
+      openModal('비밀번호는 8자 이상이어야 합니다.');
+      return;
+    }
+    if (pw!==pw2){
+      openModal('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    // 성공 (여기서 실제 API 호출 로직으로 교체)
+    console.log('signup payload', {
+      name, phone:`${ph1}-${ph2}-${ph3}`, email, birth:`${yy}-${mm}-${dd}`
+    });
+    openModal('회원가입 요청이 전송되었습니다.');
+  });
+})();
+</script>
+</body>
+</html>
