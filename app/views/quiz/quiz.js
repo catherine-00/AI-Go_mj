@@ -315,11 +315,110 @@ export async function mount(root) {
     }
   };
 
+  // 영상 재생/정지
+  const onPlayVideo = (e) => {
+    if (e.target.id !== 'playVideo') return;
+    
+    const video = $('#quizVideo');
+    const playBtn = $('#playVideo');
+    const pauseBtn = $('#pauseVideo');
+    
+    if (video && playBtn && pauseBtn) {
+      // 영상이 로드되었는지 확인
+      if (video.readyState >= 2) {
+        video.play().then(() => {
+          // 재생 성공 시 버튼 전환
+          playBtn.style.display = 'none';
+          pauseBtn.style.display = 'grid';
+        }).catch(error => {
+          console.error('영상 재생 실패:', error);
+          alert('영상 재생에 실패했습니다. 다시 시도해주세요.');
+        });
+      } else {
+        // 영상이 아직 로드되지 않은 경우
+        video.addEventListener('canplay', () => {
+          video.play().then(() => {
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'grid';
+          }).catch(error => {
+            console.error('영상 재생 실패:', error);
+            alert('영상 재생에 실패했습니다. 다시 시도해주세요.');
+          });
+        }, { once: true });
+      }
+    }
+  };
+
+  // 영상 일시정지
+  const onPauseVideo = (e) => {
+    if (e.target.id !== 'pauseVideo') return;
+    
+    const video = $('#quizVideo');
+    const playBtn = $('#playVideo');
+    const pauseBtn = $('#pauseVideo');
+    
+    if (video && playBtn && pauseBtn) {
+      video.pause();
+      playBtn.style.display = 'grid';
+      pauseBtn.style.display = 'none';
+    }
+  };
+
+  // 영상 종료 시 자동 진행
+  const onVideoEnded = () => {
+    const playBtn = $('#playVideo');
+    const pauseBtn = $('#pauseVideo');
+    
+    if (playBtn && pauseBtn) {
+      playBtn.style.display = 'grid';
+      pauseBtn.style.display = 'none';
+    }
+    
+    // 영상이 끝나면 재생 버튼만 초기화 (문제 보기 버튼은 이미 활성화됨)
+  };
+
   // 영상 화면 정보 업데이트
   const updateVideoInfo = () => {
     $('#qTotal').textContent = currentQuestions.length;
     $('#qCurrent').textContent = currentQuestion + 1;
     $('#qLevel').textContent = currentLevel;
+    
+    // 영상 재생 준비
+    const video = $('#quizVideo');
+    const playBtn = $('#playVideo');
+    const pauseBtn = $('#pauseVideo');
+    const toQuestionBtn = $('#toQuestion');
+    
+    if (video && playBtn && pauseBtn && toQuestionBtn) {
+      // 기존 이벤트 리스너 제거
+      video.removeEventListener('ended', onVideoEnded);
+      
+      // 영상 초기화
+      video.currentTime = 0;
+      video.pause();
+      
+      // 버튼 상태 초기화
+      playBtn.style.display = 'grid';
+      pauseBtn.style.display = 'none';
+      
+      // 문제 보기 버튼 활성화 (영상 재생과 관계없이)
+      toQuestionBtn.style.opacity = '1';
+      toQuestionBtn.disabled = false;
+      toQuestionBtn.style.background = 'var(--blue)';
+      
+      // 영상 이벤트 리스너 등록
+      video.addEventListener('ended', onVideoEnded);
+      
+      // 영상 로드 완료 시 재생 버튼 활성화
+      if (video.readyState >= 2) {
+        playBtn.disabled = false;
+      } else {
+        playBtn.disabled = true;
+        video.addEventListener('canplay', () => {
+          playBtn.disabled = false;
+        }, { once: true });
+      }
+    }
   };
 
   // 문제 렌더링
@@ -353,13 +452,19 @@ export async function mount(root) {
 
     selectedAnswer = null;
     $('#btnNext').disabled = true;
+    
+    // 진행률 업데이트
+    updateProgress();
   };
 
   // 진행률 업데이트
   const updateProgress = () => {
     const progress = Math.round(((currentQuestion + 1) / currentQuestions.length) * 100);
-    $('#progressBar').style.width = `${progress}%`;
-    $('#progressText').textContent = `${progress}%`;
+    const progressBar = $('#progressBar');
+    const progressText = $('#progressText');
+    
+    if (progressBar) progressBar.style.width = `${progress}%`;
+    if (progressText) progressText.textContent = `${progress}%`;
   };
 
   // 타이머 시작
@@ -369,7 +474,8 @@ export async function mount(root) {
     
     timerInterval = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
-      $('#timer').textContent = elapsed.toFixed(1);
+      const timerElement = $('#timer');
+      if (timerElement) timerElement.textContent = elapsed.toFixed(1);
     }, 100);
   };
 
@@ -395,36 +501,44 @@ export async function mount(root) {
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = elapsedTime % 60;
     
-    $('#scoreNum').textContent = `${score}점`;
-    $('#totalQ').textContent = totalQuestions;
-    $('#correctQ').textContent = correctAnswers;
-    $('#statTime').textContent = `${minutes}분 ${seconds}초`;
+    // 결과 업데이트
+    const scoreNum = $('#scoreNum');
+    const totalQ = $('#totalQ');
+    const correctQ = $('#correctQ');
+    const statTime = $('#statTime');
+    
+    if (scoreNum) scoreNum.textContent = `${score}점`;
+    if (totalQ) totalQ.textContent = totalQuestions;
+    if (correctQ) correctQ.textContent = correctAnswers;
+    if (statTime) statTime.textContent = `${minutes}분 ${seconds}초`;
     
     // 오답 노트 생성
     const wrongAnswersContainer = $('#wrongWrap');
-    wrongAnswersContainer.innerHTML = '';
-    
-    answers.forEach((answer, index) => {
-      const question = currentQuestions[index];
-      if (answer === question.answer) return; // 정답은 제외
+    if (wrongAnswersContainer) {
+      wrongAnswersContainer.innerHTML = '';
       
-      const wrongCard = document.createElement('div');
-      wrongCard.className = 'wrong-card';
-      wrongCard.innerHTML = `
-        <div class="head">
-          ✖ 문제 ${index + 1}
-          <span class="tag">${question.tag}</span>
-        </div>
-        <div style="margin:8px 0 6px">${question.text}</div>
-        <div style="color:#c0392b;font-weight:800">✘ 내 답안:</div>
-        <div style="margin:2px 0 8px">${typeof answer === 'number' ? question.options[answer] : '-'}</div>
-        <div style="color:#0b9b6b;font-weight:800">✔ 정답:</div>
-        <div>${question.options[question.answer]}</div>
-        <div class="explanation">${question.explain}</div>
-      `;
-      
-      wrongAnswersContainer.appendChild(wrongCard);
-    });
+      answers.forEach((answer, index) => {
+        const question = currentQuestions[index];
+        if (answer === question.answer) return; // 정답은 제외
+        
+        const wrongCard = document.createElement('div');
+        wrongCard.className = 'wrong-card';
+        wrongCard.innerHTML = `
+          <div class="head">
+            ✖ 문제 ${index + 1}
+            <span class="tag">${question.tag}</span>
+          </div>
+          <div style="margin:8px 0 6px">${question.text}</div>
+          <div style="color:#c0392b;font-weight:800">✘ 내 답안:</div>
+          <div style="margin:2px 0 8px">${typeof answer === 'number' ? question.options[answer] : '-'}</div>
+          <div style="color:#0b9b6b;font-weight:800">✔ 정답:</div>
+          <div>${question.options[question.answer]}</div>
+          <div class="explanation">${question.explain}</div>
+        `;
+        
+        wrongAnswersContainer.appendChild(wrongCard);
+      });
+    }
   };
 
   // ===== 이벤트 리스너 =====
@@ -474,7 +588,6 @@ export async function mount(root) {
       showView('result');
     } else {
       // 다음 문제로
-      updateProgress();
       updatePageTitle(`${currentLevel} 문제 ${currentQuestion + 1}`);
       renderQuestion();
     }
@@ -494,14 +607,6 @@ export async function mount(root) {
     showView('level');
   };
 
-  // 영상 재생 (데모용)
-  const onPlayVideo = (e) => {
-    if (e.target.id !== 'playVideo') return;
-    
-    // 실제 구현에서는 영상 재생 로직
-    alert('영상이 재생됩니다. (데모)');
-  };
-
   // 이벤트 리스너 등록
   root.addEventListener('click', onLevelClick);
   root.addEventListener('click', onToQuestion);
@@ -510,6 +615,7 @@ export async function mount(root) {
   root.addEventListener('click', onNext);
   root.addEventListener('click', onRetry);
   root.addEventListener('click', onPlayVideo);
+  root.addEventListener('click', onPauseVideo);
 
   // 초기화
   showView('level');
@@ -523,6 +629,7 @@ export async function mount(root) {
     root.removeEventListener('click', onNext);
     root.removeEventListener('click', onRetry);
     root.removeEventListener('click', onPlayVideo);
+    root.removeEventListener('click', onPauseVideo);
     
     if (timerInterval) {
       clearInterval(timerInterval);

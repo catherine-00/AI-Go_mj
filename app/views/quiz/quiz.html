@@ -268,6 +268,17 @@
     transform: translateY(-1px);
   }
   
+  .btn-primary:disabled {
+    background: var(--muted);
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .btn-primary:disabled:hover {
+    background: var(--muted);
+    transform: none;
+  }
+  
   .btn-secondary{
     background: #fff;
     color: var(--text);
@@ -322,11 +333,59 @@
     transition: all 0.2s ease;
     flex-shrink: 0;
     min-height: 44px;
+    position: absolute;
+    z-index: 10;
   }
 
   .play-btn:hover {
     background: rgba(0,0,0,0.9);
     transform: scale(1.1);
+  }
+
+  .play-btn:disabled {
+    background: rgba(0,0,0,0.3);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .play-btn:disabled:hover {
+    background: rgba(0,0,0,0.3);
+    transform: none;
+  }
+
+  .pause-btn{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    border: none;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    min-height: 44px;
+    position: absolute;
+    z-index: 10;
+  }
+
+  .pause-btn:hover {
+    background: rgba(0,0,0,0.9);
+    transform: scale(1.1);
+  }
+
+  /* 비디오 요소 스타일 */
+  #quizVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+  }
+
+  .video-card {
+    position: relative;
+    overflow: hidden;
   }
 
   .progress-info{
@@ -921,9 +980,19 @@
     <!-- 비디오 뷰 -->
     <div id="view-video" class="view page" hidden>
       <div class="video-card">
+        <video id="quizVideo" width="100%" height="100%" style="object-fit: cover;">
+          <source src="../../asset/bb_1_190512_pedestrian_149_139.mp4" type="video/mp4">
+          브라우저가 비디오를 지원하지 않습니다.
+        </video>
         <button class="play-btn" id="playVideo">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 3l14 9-14 9V3z"/>
+          </svg>
+        </button>
+        <button class="pause-btn" id="pauseVideo" style="display: none;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="6" y="4" width="4" height="16"/>
+            <rect x="14" y="4" width="4" height="16"/>
           </svg>
         </button>
       </div>

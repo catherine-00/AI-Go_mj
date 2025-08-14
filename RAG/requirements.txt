@@ -1,0 +1,13 @@
+# GPU CUDA 12.4 빌드 PyTorch 설치 명령 (requirements.txt 실행 전 아래 명령으로 설치 권장)
+# pip install --index-url https://download.pytorch.org/whl/cu124 torch torchvision torchaudio
+
+transformers==4.55.0
+langchain==0.3.27
+langchain-community==0.3.27
+langchain-core==0.3.74
+langchain-huggingface==0.3.1
+langchain-text-splitters==0.3.9
+faiss-cpu==1.11.0.post1
+pypdf==6.0.0
+ollama==0.5.3
+sentence-transformers  # HuggingFaceEmbeddings 사용 시 필수
